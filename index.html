@@ -186,12 +186,11 @@ header {
   align-items:center;
   justify-content:center;
   margin:1rem auto 1rem;
-  max-width:360px;
+  max-width:400px;
   width:100%;
 }
 
-/* SVG logo scales with width */
-.logo-svg {
+.logo-block img {
   width:100%;
   height:auto;
   display:block;
@@ -518,55 +517,13 @@ textarea{min-height:5rem;resize:vertical;}
       </div>
     </div>
 
-    <!-- INLINE SVG LOGO (black, transparent bg) -->
+    <!-- LOGO IMAGE (large, centered). 
+         IMPORTANT: file must be committed in repo root as logo.png -->
     <div class="logo-block">
-      <svg class="logo-svg" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Checkmate Fitness logo">
-        <!-- barbell left plate -->
-        <rect x="40" y="190" width="12" height="60" fill="#000"/>
-        <rect x="52" y="200" width="10" height="40" rx="2" fill="#000"/>
-        <rect x="62" y="210" width="6" height="20" rx="1" fill="#000"/>
-
-        <!-- bar / platform under pieces -->
-        <rect x="70" y="215" width="260" height="15" fill="#000"/>
-
-        <!-- pawn -->
-        <circle cx="115" cy="150" r="20" fill="#000"/>
-        <rect x="105" y="165" width="20" height="30" rx="4" fill="#000"/>
-        <rect x="100" y="195" width="30" height="15" rx="2" fill="#000"/>
-
-        <!-- king -->
-        <rect x="195" y="85" width="10" height="15" fill="#000"/>
-        <rect x="190" y="95" width="20" height="10" fill="#000"/>
-        <path d="M180 110
-                 C175 125 175 140 180 150
-                 L185 160
-                 C170 190 170 230 185 255
-                 L185 270
-                 Q185 285 200 285
-                 Q215 285 215 270
-                 L215 255
-                 C230 230 230 190 215 160
-                 L220 150
-                 C225 140 225 125 220 110
-                 Z"
-              fill="#000"/>
-
-        <!-- rook -->
-        <path d="M270 130 L270 110 L290 110 L290 130 L300 130 L300 110 L320 110 L320 130
-                 L330 130 L330 165 L270 165 Z"
-              fill="#000"/>
-        <rect x="270" y="165" width="60" height="20" rx="2" fill="#000"/>
-        <rect x="275" y="185" width="50" height="40" rx="4" fill="#000"/>
-
-        <!-- barbell right plate -->
-        <rect x="330" y="190" width="12" height="60" fill="#000"/>
-        <rect x="320" y="200" width="10" height="40" rx="2" fill="#000"/>
-        <rect x="312" y="210" width="6" height="20" rx="1" fill="#000"/>
-
-        <!-- text CHECKMATE FITNESS -->
-        <text x="200" y="335" font-family="Arial, sans-serif" font-size="48" font-weight="700" text-anchor="middle" fill="#000" letter-spacing="2">CHECKMATE</text>
-        <text x="200" y="380" font-family="Arial, sans-serif" font-size="48" font-weight="700" text-anchor="middle" fill="#000" letter-spacing="4">FITNESS</text>
-      </svg>
+      <img
+        src="logo.png"
+        alt="Checkmate Fitness - Every Move Counts"
+      />
     </div>
 
     <div class="brand-headline">Stronger Bodies. Stronger Minds. Confident Kids.</div>
