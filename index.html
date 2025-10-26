@@ -520,25 +520,21 @@ textarea{min-height:5rem;resize:vertical;}
 
 .floater {
   position:absolute;
-  width:160px;
-  max-width:38vw;
-
+  width:200px; /* bigger than before */
+  max-width:42vw;
   background:var(--polaroid-bg);
   border:3px solid #000;
   border-radius:0.75rem;
-
   box-shadow:
     6px 6px 0 rgba(0,0,0,.5),
     0 30px 60px rgba(0,0,0,.35);
-
-  padding:.5rem .5rem .9rem; /* extra bottom space = polaroid border */
+  padding:.5rem .5rem 1rem; /* extra bottom = polaroid look */
   text-align:center;
   font-size:.7rem;
   font-weight:600;
   color:#000;
   line-height:1.3;
-
-  z-index:1; /* sits behind main text but above background checker */
+  z-index:0; /* sits behind teal frame & text */
 }
 
 .floater img {
@@ -551,7 +547,7 @@ textarea{min-height:5rem;resize:vertical;}
   object-fit:cover;
 }
 
-/* captions under photos (optional, can edit or leave blank text) */
+/* captions */
 .floater span {
   display:block;
   margin-top:.4rem;
@@ -560,32 +556,33 @@ textarea{min-height:5rem;resize:vertical;}
   color:#000;
 }
 
-/* placements + tilts for desktop */
-.floater.f1 { top:180px; left:-90px; transform:rotate(-6deg); }
-.floater.f2 { top:520px; right:-100px; transform:rotate(4deg); }
-.floater.f3 { top:900px; left:-80px; transform:rotate(-3deg); }
-.floater.f4 { top:1250px; right:-90px; transform:rotate(5deg); }
-.floater.f5 { top:1600px; right:-70px; transform:rotate(-4deg); }
+/* new larger positions — bleed outside teal border */
+.floater.f1 { top:140px; left:-130px; transform:rotate(-7deg); }
+.floater.f2 { top:480px; right:-140px; transform:rotate(5deg); }
+.floater.f3 { top:850px; left:-120px; transform:rotate(-4deg); }
+.floater.f4 { top:1200px; right:-130px; transform:rotate(6deg); }
+.floater.f5 { top:1550px; left:-100px; transform:rotate(-5deg); }
 
-/* on phones: center them, fade them so text stays readable */
+/* on phones: center & fade them */
 @media(max-width:800px){
   .floater {
     left:50% !important;
     right:auto !important;
     transform:translateX(-50%) rotate(0deg) !important;
     width:180px;
-    max-width:60vw;
-    opacity:.18;
-    box-shadow:
-      4px 4px 0 rgba(0,0,0,.5),
-      0 15px 30px rgba(0,0,0,.3);
+    max-width:65vw;
+    opacity:.15;
   }
-
   .floater.f1 { top:140px; }
   .floater.f2 { top:480px; }
   .floater.f3 { top:820px; }
   .floater.f4 { top:1180px; }
   .floater.f5 { top:1500px; }
+}
+
+/* allow overflow so photos can peek out */
+.page-wrap {
+  overflow: visible;
 }
 </style>
 </head>
