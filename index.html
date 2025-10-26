@@ -54,8 +54,7 @@ body {
   flex-direction:column;
   position:relative;
   isolation:isolate;
-  /* IMPORTANT: allow floating photos to hang outside border */
-  overflow:visible;
+  overflow:visible; /* let polaroids spill outside border */
 }
 @media(min-width:600px){
   .page-wrap{padding:3rem 3rem 4rem;}
@@ -93,56 +92,67 @@ header {
   align-items:center;
 }
 
-/* UPGRADED COMIC BURST */
+/* SUPER COMIC BURST */
 .burst-wrap {
   position:relative;
   display:flex;
   justify-content:center;
   width:100%;
-  margin-top:100px; /* sits below checker strip */
+  margin-top:100px;
   z-index:4;
-  pointer-events:none; /* so tape doesn't block clicks */
+  pointer-events:none;
 }
 
-/* The clickable core (text bubble) */
 .burst-button {
   position:relative;
-  background: var(--teal-main);
-  color:#000;
+  cursor:pointer;
+  pointer-events:auto;
+
+  /* positioning / tilt */
+  transform: rotate(-5deg);
+
+  /* layout */
+  min-width:220px;
+  max-width:80%;
+  text-align:center;
+  padding:1rem 1rem .8rem;
+
+  /* text */
+  font-family: inherit;
   font-weight:800;
+  color:#000;
   font-size:1rem;
   line-height:1.2;
-  text-align:center;
-  cursor:pointer;
-  padding:1rem .9rem .8rem;
-  min-width:210px;
-  max-width:80%;
-  transform: rotate(-5deg);
   text-transform:uppercase;
+
+  /* visual bubble */
+  background:#fff;
   border:4px solid #000;
-  font-family: inherit;
+  border-radius:.5rem;
   box-shadow:
-    0 0 20px rgba(0,201,195,.6),
+    0 0 30px rgba(0,201,195,.6),
     6px 6px 0 #000,
     0 25px 40px rgba(0,0,0,.4);
-  pointer-events:auto; /* re-enable click on the main button */
 }
+
 .burst-button span {
   display:block;
   font-size:.8rem;
   font-weight:600;
   text-transform:none;
+  line-height:1.2;
+  margin-top:.25rem;
 }
 
-/* jagged star behind burst-button (cartoony explosion shape) */
+/* jagged star layer BEHIND bubble */
 .burst-button:before {
   content:"";
   position:absolute;
   z-index:-2;
   top:50%;
   left:50%;
-  width:250px;
-  height:250px;
+  width:260px;
+  height:260px;
   transform:translate(-50%,-50%) rotate(-3deg);
   background:var(--teal-main);
   clip-path: polygon(
@@ -173,39 +183,38 @@ header {
   );
   border:4px solid #000;
   box-shadow:6px 6px 0 #000;
+  filter:drop-shadow(0 0 20px rgba(0,201,195,.7));
 }
 
-/* little "tape" tab effect on the corner */
+/* tiny fake highlight "shine" */
 .burst-button:after {
   content:"";
   position:absolute;
-  top:-12px;
-  right:-18px;
-  width:50px;
-  height:24px;
-  background:#fff;
-  border:3px solid #000;
-  box-shadow:3px 3px 0 rgba(0,0,0,.4);
-  transform:rotate(8deg);
+  top:.4rem;
+  left:.6rem;
+  width:60px;
+  height:18px;
+  background:rgba(255,255,255,.5);
+  border-radius:20px;
+  transform:rotate(-8deg);
+  box-shadow:0 0 10px rgba(255,255,255,.6);
 }
 
-/* responsive tweaks */
 @media(max-width:520px){
-  .burst-wrap{
-    margin-top:90px;
-  }
+  .burst-wrap{ margin-top:90px; }
   .burst-button{
     transform: rotate(-4deg);
-    min-width:190px;
+    min-width:200px;
     font-size:.9rem;
+    padding:0.9rem 0.9rem .7rem;
   }
   .burst-button:before{
-    width:210px;
-    height:210px;
+    width:220px;
+    height:220px;
   }
 }
 
-/* logo container */
+/* logo block */
 .logo-block{
   display:flex;
   flex-direction:column;
@@ -223,13 +232,54 @@ header {
   display:block;
 }
 
-/* brand headline text */
+/* NEW HEADLINE under logo */
+.tagline-main {
+  margin-top:1rem;
+  font-size:clamp(1.5rem,1vw +1rem,2rem);
+  font-weight:900;
+  line-height:1.15;
+  text-align:center;
+  letter-spacing:-0.04em;
+  display:inline-block;
+
+  /* chessboard teal/white fill pattern */
+  background:
+    repeating-conic-gradient(
+      from 0deg,
+      var(--teal-main) 0 25%,
+      #ffffff 0 50%
+    );
+  background-size: 24px 24px;
+  -webkit-background-clip:text;
+  color:transparent;
+
+  /* black outline around text */
+  text-shadow:
+    -1px -1px 0 #000,
+     1px -1px 0 #000,
+    -1px  1px 0 #000,
+     1px  1px 0 #000,
+     0   2px 0 #000,
+     2px  0  0 #000,
+    -2px  0  0 #000;
+}
+
+.tagline-wrapper{
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  text-align:center;
+  max-width:90%;
+  margin:0 auto;
+}
+
+/* supporting subheadline */
 .brand-headline{
   margin-top:1rem;
-  font-size:clamp(1.7rem,1vw +1.3rem,2.2rem);
+  font-size:clamp(1.3rem,1vw +1rem,1.6rem);
   font-weight:800;
   color:var(--text-dark);
-  line-height:1.15;
+  line-height:1.2;
   text-align:center;
   letter-spacing:-0.04em;
   z-index:3;
@@ -270,10 +320,10 @@ header {
 section{
   margin-top:2.5rem;
   position:relative;
-  z-index:3; /* keep main content over floaters */
+  z-index:3; /* over floaters */
 }
 
-/* HEADERS: teal letters + thin black outline */
+/* section headers */
 .section-head{
   text-align:center;
   margin-bottom:1.5rem;
@@ -537,10 +587,7 @@ textarea{min-height:5rem;resize:vertical;}
   margin-top:.5rem;
 }
 
-/* ------------------------------------------------ */
-/* FLOATING POLAROID-STYLE PHOTOS (v2)              */
-/* ------------------------------------------------ */
-
+/* FLOATING POLAROID-STYLE PHOTOS */
 .floater {
   position:absolute;
   width:200px;
@@ -557,7 +604,7 @@ textarea{min-height:5rem;resize:vertical;}
   font-weight:600;
   color:#000;
   line-height:1.3;
-  z-index:2; /* behind main content (z=3) but above header-bg (z=1) */
+  z-index:2; /* behind main text (z=3), above checker bg (z=1) */
 }
 
 .floater img {
@@ -578,14 +625,14 @@ textarea{min-height:5rem;resize:vertical;}
   color:#000;
 }
 
-/* placements + tilts for desktop */
+/* desktop placement */
 .floater.f1 { top:140px; left:-130px; transform:rotate(-7deg); }
 .floater.f2 { top:480px; right:-140px; transform:rotate(5deg); }
 .floater.f3 { top:850px; left:-120px; transform:rotate(-4deg); }
 .floater.f4 { top:1200px; right:-130px; transform:rotate(6deg); }
 .floater.f5 { top:1550px; left:-100px; transform:rotate(-5deg); }
 
-/* on phones: center & fade them so text stays readable */
+/* mobile: center them faintly behind content */
 @media(max-width:800px){
   .floater {
     left:50% !important;
@@ -594,7 +641,7 @@ textarea{min-height:5rem;resize:vertical;}
     width:180px;
     max-width:65vw;
     opacity:.15;
-    z-index:1; /* drop them behind content more on mobile */
+    z-index:1;
   }
   .floater.f1 { top:140px; }
   .floater.f2 { top:480px; }
@@ -611,7 +658,7 @@ textarea{min-height:5rem;resize:vertical;}
        IMPORTANT: upload these files next to index.html with these exact names:
        logo.png
        chess-teacher.jpg  (group of kids w/ instructor)
-       chess.webp         (2 kids playing chess at table)
+       chess.jpg          (new smiling boy playing chess)
        ladder.jpg         (ladder / hurdles)
        squats.jpg         (2 kids squatting indoors)
        pushups.jpg        (kid doing pushup/plank)
@@ -623,7 +670,7 @@ textarea{min-height:5rem;resize:vertical;}
   </div>
 
   <div class="floater f2">
-    <img src="chess.webp" alt="Kids playing chess and smiling">
+    <img src="chess.jpg" alt="Focused chess battle">
     <span>Strategy &amp; patience.</span>
   </div>
 
@@ -646,7 +693,7 @@ textarea{min-height:5rem;resize:vertical;}
 
   <header>
 
-    <!-- UPGRADED BURST -->
+    <!-- IMPROVED BURST -->
     <div class="burst-wrap">
       <div class="burst-button" id="openFormBurst">
         First Session is FREE!
@@ -654,7 +701,7 @@ textarea{min-height:5rem;resize:vertical;}
       </div>
     </div>
 
-    <!-- LOGO (large, centered). logo.png must exist in repo root -->
+    <!-- LOGO IMAGE -->
     <div class="logo-block">
       <img
         src="logo.png"
@@ -662,6 +709,14 @@ textarea{min-height:5rem;resize:vertical;}
       />
     </div>
 
+    <!-- NEW CHECKERED HEADLINE -->
+    <div class="tagline-wrapper">
+      <div class="tagline-main">
+        Chess + Fitness for Kids
+      </div>
+    </div>
+
+    <!-- subheadline -->
     <div class="brand-headline">Stronger Bodies. Stronger Minds. Confident Kids.</div>
 
     <div class="hero-sub">
@@ -783,7 +838,7 @@ function openModal() { modal.style.display = 'flex'; }
 function closeModal() { modal.style.display = 'none'; }
 
 if (openBtn)   openBtn.addEventListener('click', openModal);
-if (openBurst) openBurst.addEventListener('click', openModal);
+if (openBurst) openBurst && openBurst.addEventListener('click', openModal);
 if (closeBtn)  closeBtn.addEventListener('click', closeModal);
 
 modal.addEventListener('click', (e) => {
