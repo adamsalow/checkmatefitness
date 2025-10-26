@@ -92,51 +92,28 @@ header {
   text-align:center;
 }
 
-/* ===== HERO TOP: LOGO + CIRCLE BADGE SIDE BY SIDE ===== */
-
-.hero-top-row {
-  position:relative;
-  display:flex;
-  flex-direction:row;
-  align-items:flex-start;
-  justify-content:center;
-  flex-wrap:nowrap;
-  gap:1rem;
-  width:100%;
-  max-width:500px;
-  margin:2rem auto 1rem;
+/* ===== ROUND BADGE (FREE SESSION) ===== */
+.free-circle-wrapper {
+  position:absolute;
+  top:1rem;
+  right:1rem;
+  z-index:5;
+  pointer-events:auto;
 }
-
 @media(max-width:520px){
-  .hero-top-row{
-    flex-direction:column;
-    align-items:center;
-    gap:1rem;
+  .free-circle-wrapper{
+    position:static;
+    order:3;
+    margin-top:1rem;
   }
 }
 
-/* LOGO */
-.logo-block{
-  flex:0 1 320px;
-  max-width:320px;
-  width:100%;
-}
-.logo-block img {
-  width:100%;
-  height:auto;
-  display:block;
-}
-
-/* ROUND BADGE */
 .free-circle {
-  flex:0 0 auto;
   background:#fff;
   border:4px solid #000;
   border-radius:50%;
-  min-width:130px;
-  min-height:130px;
-  max-width:130px;
-  max-height:130px;
+  width:130px;
+  height:130px;
 
   display:flex;
   align-items:center;
@@ -151,36 +128,10 @@ header {
   line-height:1.15;
   cursor:pointer;
   position:relative;
+  z-index:2;
 }
 
-/* Circle text */
-.free-circle-inner {
-  font-family:inherit;
-  font-weight:800;
-  font-size:.9rem;
-  text-transform:uppercase;
-  color:#000;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-}
-
-.free-circle-inner .line1 {
-  font-size:.8rem;
-  font-weight:700;
-}
-.free-circle-inner .line2 {
-  font-size:1rem;
-  font-weight:800;
-}
-.free-circle-inner .line3 {
-  font-size:.7rem;
-  font-weight:600;
-  margin-top:.25rem;
-}
-
-/* light teal ring BEHIND for pop */
+/* teal ring behind for pop */
 .free-circle:before {
   content:"";
   position:absolute;
@@ -193,15 +144,62 @@ header {
   box-shadow:6px 6px 0 #000;
 }
 
-/* on mobile, make badge sit under logo instead of beside */
+/* text in circle */
+.free-circle-inner {
+  font-family:inherit;
+  font-weight:800;
+  font-size:.9rem;
+  text-transform:uppercase;
+  color:#000;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+.free-circle-inner .line1 {
+  font-size:.8rem;
+  font-weight:700;
+  line-height:1.1;
+}
+.free-circle-inner .line2 {
+  font-size:1rem;
+  font-weight:800;
+  line-height:1.1;
+}
+.free-circle-inner .line3 {
+  font-size:1rem;
+  font-weight:800;
+  line-height:1.1;
+}
+.free-circle-inner .line4 {
+  font-size:.7rem;
+  font-weight:600;
+  line-height:1.2;
+  margin-top:.25rem;
+}
+
 @media(max-width:520px){
-  .free-circle{
-    max-width:120px;
-    max-height:120px;
-    min-width:120px;
-    min-height:120px;
+  .free-circle {
+    width:120px;
+    height:120px;
   }
-  .free-circle-inner .line2 { font-size:.9rem; }
+  .free-circle-inner .line2,
+  .free-circle-inner .line3 {
+    font-size:.9rem;
+  }
+}
+
+/* LOGO (centered again) */
+.logo-block{
+  width:100%;
+  max-width:400px;
+  margin:2rem auto 1rem;
+  z-index:3;
+}
+.logo-block img {
+  width:100%;
+  height:auto;
+  display:block;
 }
 
 /* BIG TAGLINE: Chess + Fitness for Kids */
@@ -215,9 +213,14 @@ header {
   z-index:3;
 }
 
-/* Bigger size, thin outline, teal checker fill */
+/*
+To make sure the checkerboard fill shows:
+- We force it on the text element itself (not a flex parent)
+- We use background-clip:text and make sure color is transparent
+- We give just a THIN black outline using text-shadow 4-way
+*/
 .tagline-main {
-  font-size:clamp(2.4rem,2.4vw + 2rem,3.2rem); /* bigger than before */
+  font-size:clamp(2.5rem,2.5vw + 2rem,3.4rem); /* bigger */
   font-weight:900;
   line-height:1.1;
   letter-spacing:-0.04em;
@@ -231,12 +234,12 @@ header {
       var(--teal-main) 0 25%,
       #ffffff 0 50%
     );
-  background-size: 24px 24px;
-
+  background-size:24px 24px;
   -webkit-background-clip:text;
+  background-clip:text;
   color:transparent;
 
-  /* THIN black outline instead of giant shadow */
+  /* THIN black outline */
   text-shadow:
     -1px -1px 0 #000,
      1px -1px 0 #000,
@@ -246,12 +249,12 @@ header {
 
 @media(max-width:520px){
   .tagline-main {
-    font-size:clamp(2rem,2vw + 1.5rem,2.5rem);
+    font-size:clamp(2.2rem,2vw + 1.8rem,2.6rem);
     line-height:1.1;
   }
 }
 
-/* subheadline */
+/* subheadline under tagline */
 .brand-headline{
   margin-top:.5rem;
   font-size:clamp(1.2rem,1vw +1rem,1.5rem);
@@ -613,6 +616,11 @@ textarea{min-height:5rem;resize:vertical;}
 
 /* mobile: center & fade them under content */
 @media(max-width:800px){
+  .free-circle-wrapper{
+    position:static;
+    margin-top:1rem;
+  }
+
   .floater {
     left:50% !important;
     right:auto !important;
@@ -663,27 +671,27 @@ textarea{min-height:5rem;resize:vertical;}
 
   <header>
 
-    <!-- LOGO + CIRCLE BADGE ROW -->
-    <div class="hero-top-row">
-      <div class="logo-block">
-        <img
-          src="logo.png"
-          alt="Checkmate Fitness logo"
-        />
-      </div>
-
-      <!-- ROUND BADGE that opens the form -->
-      <div class="free-circle" id="openFormCircle">
+    <!-- circle badge absolutely positioned in header, not breaking logo centering -->
+    <div class="free-circle-wrapper" id="openFormCircle">
+      <div class="free-circle">
         <div class="free-circle-inner">
           <div class="line1">First</div>
           <div class="line2">Session</div>
-          <div class="line2">is FREE!</div>
-          <div class="line3">Tap to claim</div>
+          <div class="line3">is FREE!</div>
+          <div class="line4">Tap to claim</div>
         </div>
       </div>
     </div>
 
-    <!-- HUGE TAGLINE -->
+    <!-- logo centered -->
+    <div class="logo-block">
+      <img
+        src="logo.png"
+        alt="Checkmate Fitness logo"
+      />
+    </div>
+
+    <!-- HUGE TAGLINE with checker fill + thin black outline -->
     <div class="tagline-wrapper">
       <div class="tagline-main">
         Chess + Fitness for Kids
@@ -807,15 +815,15 @@ document.getElementById('year').textContent = new Date().getFullYear();
 
 const modal = document.getElementById('leadModal');
 const openBtn = document.getElementById('openFormButton');
-const circleBtn = document.getElementById('openFormCircle');
+const circleWrapper = document.getElementById('openFormCircle') || document.querySelector('.free-circle-wrapper');
 const closeBtn = document.getElementById('closeModalBtn');
 
 function openModal() { modal.style.display = 'flex'; }
 function closeModal() { modal.style.display = 'none'; }
 
-if (openBtn)    openBtn.addEventListener('click', openModal);
-if (circleBtn)  circleBtn.addEventListener('click', openModal);
-if (closeBtn)   closeBtn.addEventListener('click', closeModal);
+if (openBtn)        openBtn.addEventListener('click', openModal);
+if (circleWrapper)  circleWrapper.addEventListener('click', openModal);
+if (closeBtn)       closeBtn.addEventListener('click', closeModal);
 
 modal.addEventListener('click', (e) => {
   if (e.target === modal) { closeModal(); }
