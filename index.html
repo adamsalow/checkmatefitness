@@ -83,31 +83,125 @@ body {
 }
 
 header {
-  text-align:center;
   margin-bottom:2rem;
   position:relative;
   z-index:3;
   display:flex;
   flex-direction:column;
   align-items:center;
+  text-align:center;
+}
+
+/* ===== HERO TOP: LOGO + CIRCLE BADGE SIDE BY SIDE ===== */
+
+.hero-top-row {
+  position:relative;
+  display:flex;
+  flex-direction:row;
+  align-items:flex-start;
+  justify-content:center;
+  flex-wrap:nowrap;
+  gap:1rem;
+  width:100%;
+  max-width:500px;
+  margin:2rem auto 1rem;
+}
+
+@media(max-width:520px){
+  .hero-top-row{
+    flex-direction:column;
+    align-items:center;
+    gap:1rem;
+  }
 }
 
 /* LOGO */
 .logo-block{
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-  justify-content:center;
-  margin:2rem auto 1rem;
-  max-width:400px;
+  flex:0 1 320px;
+  max-width:320px;
   width:100%;
-  z-index:3;
 }
-
 .logo-block img {
   width:100%;
   height:auto;
   display:block;
+}
+
+/* ROUND BADGE */
+.free-circle {
+  flex:0 0 auto;
+  background:#fff;
+  border:4px solid #000;
+  border-radius:50%;
+  min-width:130px;
+  min-height:130px;
+  max-width:130px;
+  max-height:130px;
+
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  text-align:center;
+
+  box-shadow:
+    6px 6px 0 #000,
+    0 25px 40px rgba(0,0,0,.4);
+
+  padding:.75rem;
+  line-height:1.15;
+  cursor:pointer;
+  position:relative;
+}
+
+/* Circle text */
+.free-circle-inner {
+  font-family:inherit;
+  font-weight:800;
+  font-size:.9rem;
+  text-transform:uppercase;
+  color:#000;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+}
+
+.free-circle-inner .line1 {
+  font-size:.8rem;
+  font-weight:700;
+}
+.free-circle-inner .line2 {
+  font-size:1rem;
+  font-weight:800;
+}
+.free-circle-inner .line3 {
+  font-size:.7rem;
+  font-weight:600;
+  margin-top:.25rem;
+}
+
+/* light teal ring BEHIND for pop */
+.free-circle:before {
+  content:"";
+  position:absolute;
+  inset:-8px;
+  border-radius:50%;
+  background:var(--teal-main);
+  border:4px solid #000;
+  z-index:-1;
+  transform:rotate(-4deg);
+  box-shadow:6px 6px 0 #000;
+}
+
+/* on mobile, make badge sit under logo instead of beside */
+@media(max-width:520px){
+  .free-circle{
+    max-width:120px;
+    max-height:120px;
+    min-width:120px;
+    min-height:120px;
+  }
+  .free-circle-inner .line2 { font-size:.9rem; }
 }
 
 /* BIG TAGLINE: Chess + Fitness for Kids */
@@ -121,8 +215,9 @@ header {
   z-index:3;
 }
 
+/* Bigger size, thin outline, teal checker fill */
 .tagline-main {
-  font-size:clamp(2.2rem,2.2vw + 1.8rem,3rem); /* WAY bigger now */
+  font-size:clamp(2.4rem,2.4vw + 2rem,3.2rem); /* bigger than before */
   font-weight:900;
   line-height:1.1;
   letter-spacing:-0.04em;
@@ -130,7 +225,6 @@ header {
   text-align:center;
   padding:0.25rem 0.5rem;
 
-  /* teal/white checkerboard fill */
   background:
     repeating-conic-gradient(
       from 0deg,
@@ -142,131 +236,22 @@ header {
   -webkit-background-clip:text;
   color:transparent;
 
-  /* bold black outline around text */
+  /* THIN black outline instead of giant shadow */
   text-shadow:
-    -2px -2px 0 #000,
-     2px -2px 0 #000,
-    -2px  2px 0 #000,
-     2px  2px 0 #000,
-     0   3px 0 #000,
-     3px  0  0 #000,
-    -3px  0  0 #000;
-}
-
-/* NEW BURST BELOW TAGLINE (clean, comic-y badge) */
-.free-burst-wrap {
-  position:relative;
-  margin-top:1rem;
-  margin-bottom:1.5rem;
-  z-index:4;
-  display:flex;
-  justify-content:center;
-  width:100%;
-  pointer-events:none; /* default, then enable on inner button */
-}
-
-.free-burst {
-  position:relative;
-  pointer-events:auto;
-  cursor:pointer;
-  transform:rotate(-4deg);
-
-  /* layout */
-  min-width:240px;
-  max-width:85%;
-  padding:1rem 1rem .8rem;
-  text-align:center;
-
-  /* text */
-  font-weight:800;
-  font-size:1rem;
-  line-height:1.2;
-  text-transform:uppercase;
-  font-family:inherit;
-  color:#000;
-  background:#fff;
-
-  /* outline bubble */
-  border:4px solid #000;
-  border-radius:.5rem;
-  box-shadow:
-    6px 6px 0 #000,
-    0 25px 40px rgba(0,0,0,.4);
-
-}
-
-/* line 2 inside burst */
-.free-burst span {
-  display:block;
-  font-size:.8rem;
-  font-weight:600;
-  text-transform:none;
-  margin-top:.3rem;
-  line-height:1.2;
-}
-
-/* jagged teal star behind */
-.free-burst:before {
-  content:"";
-  position:absolute;
-  z-index:-2;
-  top:50%;
-  left:50%;
-  width:260px;
-  height:260px;
-  transform:translate(-50%,-50%) rotate(-3deg);
-  background:var(--teal-main);
-  border:4px solid #000;
-  box-shadow:6px 6px 0 #000;
-  filter:drop-shadow(0 0 20px rgba(0,201,195,.7));
-
-  clip-path: polygon(
-    50% 0%,
-    60% 12%,
-    80% 4%,
-    75% 24%,
-    100% 20%,
-    86% 38%,
-    100% 50%,
-    86% 62%,
-    100% 80%,
-    74% 76%,
-    80% 96%,
-    58% 86%,
-    50% 100%,
-    42% 86%,
-    20% 96%,
-    26% 76%,
-    0% 80%,
-    14% 62%,
-    0% 50%,
-    14% 38%,
-    0% 20%,
-    25% 24%,
-    20% 4%,
-    40% 12%
-  );
+    -1px -1px 0 #000,
+     1px -1px 0 #000,
+    -1px  1px 0 #000,
+     1px  1px 0 #000;
 }
 
 @media(max-width:520px){
   .tagline-main {
-    font-size:clamp(2rem,2vw + 1.5rem,2.4rem);
+    font-size:clamp(2rem,2vw + 1.5rem,2.5rem);
     line-height:1.1;
-  }
-
-  .free-burst {
-    transform:rotate(-3deg);
-    min-width:210px;
-    font-size:.9rem;
-    padding:.9rem .9rem .7rem;
-  }
-  .free-burst:before {
-    width:220px;
-    height:220px;
   }
 }
 
-/* subheadline under burst */
+/* subheadline */
 .brand-headline{
   margin-top:.5rem;
   font-size:clamp(1.2rem,1vw +1rem,1.5rem);
@@ -648,16 +633,7 @@ textarea{min-height:5rem;resize:vertical;}
 <body>
 <main class="page-wrap">
 
-  <!-- floating polaroid-style photos
-       These image files must sit in the repo root with index.html:
-       logo.png
-       chess-teacher.jpg  (group with instructor)
-       chess.jpg          (new smiling boy playing chess)
-       ladder.jpg         (ladder / hurdles)
-       squats.jpg         (kids doing squats)
-       pushups.jpg        (kid pushup)
-  -->
-
+  <!-- floating polaroid-style photos -->
   <div class="floater f1">
     <img src="chess-teacher.jpg" alt="Kids learning chess with coach">
     <span>Thinking before moving.</span>
@@ -687,26 +663,30 @@ textarea{min-height:5rem;resize:vertical;}
 
   <header>
 
-    <!-- LOGO -->
-    <div class="logo-block">
-      <img
-        src="logo.png"
-        alt="Checkmate Fitness logo"
-      />
+    <!-- LOGO + CIRCLE BADGE ROW -->
+    <div class="hero-top-row">
+      <div class="logo-block">
+        <img
+          src="logo.png"
+          alt="Checkmate Fitness logo"
+        />
+      </div>
+
+      <!-- ROUND BADGE that opens the form -->
+      <div class="free-circle" id="openFormCircle">
+        <div class="free-circle-inner">
+          <div class="line1">First</div>
+          <div class="line2">Session</div>
+          <div class="line2">is FREE!</div>
+          <div class="line3">Tap to claim</div>
+        </div>
+      </div>
     </div>
 
     <!-- HUGE TAGLINE -->
     <div class="tagline-wrapper">
       <div class="tagline-main">
         Chess + Fitness for Kids
-      </div>
-    </div>
-
-    <!-- FREE FIRST SESSION BURST -->
-    <div class="free-burst-wrap">
-      <div class="free-burst" id="openFormBurst">
-        First Session is FREE!
-        <span>Tap to claim</span>
       </div>
     </div>
 
@@ -827,21 +807,15 @@ document.getElementById('year').textContent = new Date().getFullYear();
 
 const modal = document.getElementById('leadModal');
 const openBtn = document.getElementById('openFormButton');
-const openBurst = document.getElementById('openFormBurst') || document.getElementById('openFormBurst'); // old safety
-const freeBurst = document.getElementById('openFormBurst'); // legacy id removed, but leaving safety
-
+const circleBtn = document.getElementById('openFormCircle');
 const closeBtn = document.getElementById('closeModalBtn');
 
 function openModal() { modal.style.display = 'flex'; }
 function closeModal() { modal.style.display = 'none'; }
 
-if (openBtn) openBtn.addEventListener('click', openModal);
-
-/* Burst button is now .free-burst with id="openFormBurst" replaced by that same behavior */
-const burstBtn = document.querySelector('.free-burst');
-if (burstBtn) burstBtn.addEventListener('click', openModal);
-
-if (closeBtn) closeBtn.addEventListener('click', closeModal);
+if (openBtn)    openBtn.addEventListener('click', openModal);
+if (circleBtn)  circleBtn.addEventListener('click', openModal);
+if (closeBtn)   closeBtn.addEventListener('click', closeModal);
 
 modal.addEventListener('click', (e) => {
   if (e.target === modal) { closeModal(); }
