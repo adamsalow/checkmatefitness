@@ -14,6 +14,7 @@
   --radius-xl: 1.5rem;
   --radius-lg: 1rem;
   --grid-size: 28px;
+  --polaroid-bg: #fff;
 }
 
 /* reset */
@@ -53,6 +54,8 @@ body {
   flex-direction:column;
   position:relative;
   isolation:isolate;
+  /* IMPORTANT: allow floating photos to hang outside border */
+  overflow:visible;
 }
 @media(min-width:600px){
   .page-wrap{padding:3rem 3rem 4rem;}
@@ -84,38 +87,45 @@ header {
   text-align:center;
   margin-bottom:2rem;
   position:relative;
-  z-index:2;
+  z-index:3;
   display:flex;
   flex-direction:column;
   align-items:center;
 }
 
-/* COMIC BURST "FREE SESSION" CALLOUT */
+/* UPGRADED COMIC BURST */
 .burst-wrap {
   position:relative;
   display:flex;
   justify-content:center;
   width:100%;
-  margin-top:100px; /* sits just below checker strip */
+  margin-top:100px; /* sits below checker strip */
+  z-index:4;
+  pointer-events:none; /* so tape doesn't block clicks */
 }
 
+/* The clickable core (text bubble) */
 .burst-button {
   position:relative;
   background: var(--teal-main);
   color:#000;
   font-weight:800;
-  font-size:.9rem;
+  font-size:1rem;
   line-height:1.2;
   text-align:center;
   cursor:pointer;
   padding:1rem .9rem .8rem;
-  width:190px;
-  max-width:70%;
-  transform: rotate(-6deg);
+  min-width:210px;
+  max-width:80%;
+  transform: rotate(-5deg);
   text-transform:uppercase;
-  box-shadow:4px 4px 0 #000,0 20px 40px rgba(0,0,0,.25);
   border:4px solid #000;
   font-family: inherit;
+  box-shadow:
+    0 0 20px rgba(0,201,195,.6),
+    6px 6px 0 #000,
+    0 25px 40px rgba(0,0,0,.4);
+  pointer-events:auto; /* re-enable click on the main button */
 }
 .burst-button span {
   display:block;
@@ -124,58 +134,74 @@ header {
   text-transform:none;
 }
 
-/* jagged starburst behind the button */
+/* jagged star behind burst-button (cartoony explosion shape) */
 .burst-button:before {
   content:"";
   position:absolute;
-  z-index:-1;
+  z-index:-2;
   top:50%;
   left:50%;
-  width:220px;
-  height:220px;
-  transform:translate(-50%,-50%);
+  width:250px;
+  height:250px;
+  transform:translate(-50%,-50%) rotate(-3deg);
   background:var(--teal-main);
   clip-path: polygon(
     50% 0%,
-    60% 15%,
-    80% 5%,
-    75% 25%,
+    60% 12%,
+    80% 4%,
+    75% 24%,
     100% 20%,
-    85% 40%,
+    86% 38%,
     100% 50%,
-    85% 60%,
+    86% 62%,
     100% 80%,
-    75% 75%,
-    80% 95%,
-    60% 85%,
+    74% 76%,
+    80% 96%,
+    58% 86%,
     50% 100%,
-    40% 85%,
-    20% 95%,
-    25% 75%,
+    42% 86%,
+    20% 96%,
+    26% 76%,
     0% 80%,
-    15% 60%,
+    14% 62%,
     0% 50%,
-    15% 40%,
+    14% 38%,
     0% 20%,
-    25% 25%,
-    20% 5%,
-    40% 15%
+    25% 24%,
+    20% 4%,
+    40% 12%
   );
   border:4px solid #000;
-  box-shadow:4px 4px 0 #000;
+  box-shadow:6px 6px 0 #000;
 }
 
+/* little "tape" tab effect on the corner */
+.burst-button:after {
+  content:"";
+  position:absolute;
+  top:-12px;
+  right:-18px;
+  width:50px;
+  height:24px;
+  background:#fff;
+  border:3px solid #000;
+  box-shadow:3px 3px 0 rgba(0,0,0,.4);
+  transform:rotate(8deg);
+}
+
+/* responsive tweaks */
 @media(max-width:520px){
   .burst-wrap{
     margin-top:90px;
   }
   .burst-button{
     transform: rotate(-4deg);
-    width:170px;
+    min-width:190px;
+    font-size:.9rem;
   }
   .burst-button:before{
-    width:190px;
-    height:190px;
+    width:210px;
+    height:210px;
   }
 }
 
@@ -188,6 +214,7 @@ header {
   margin:1rem auto 1rem;
   max-width:400px;
   width:100%;
+  z-index:3;
 }
 
 .logo-block img {
@@ -205,6 +232,7 @@ header {
   line-height:1.15;
   text-align:center;
   letter-spacing:-0.04em;
+  z-index:3;
 }
 
 .hero-sub{
@@ -215,6 +243,7 @@ header {
   font-weight:500;
   color:var(--text-mid);
   text-align:center;
+  z-index:3;
 }
 
 /* service area ribbon */
@@ -233,11 +262,15 @@ header {
   text-transform:uppercase;
   letter-spacing:.03em;
   border:3px solid #000;
+  z-index:3;
+  position:relative;
 }
 
 /* sections */
 section{
   margin-top:2.5rem;
+  position:relative;
+  z-index:3; /* keep main content over floaters */
 }
 
 /* HEADERS: teal letters + thin black outline */
@@ -395,6 +428,8 @@ footer{
   color:#666;
   line-height:1.4;
   margin-top:3rem;
+  position:relative;
+  z-index:3;
 }
 
 /* modal overlay + card */
@@ -434,7 +469,7 @@ footer{
   box-shadow:3px 3px 0 rgba(0,0,0,.4);
 }
 
-/* modal heading style (teal outlined) */
+/* modal heading style */
 .modal-head{
   font-size:1.2rem;
   font-weight:800;
@@ -501,15 +536,117 @@ textarea{min-height:5rem;resize:vertical;}
   text-align:center;
   margin-top:.5rem;
 }
+
+/* ------------------------------------------------ */
+/* FLOATING POLAROID-STYLE PHOTOS (v2)              */
+/* ------------------------------------------------ */
+
+.floater {
+  position:absolute;
+  width:200px;
+  max-width:42vw;
+  background:var(--polaroid-bg);
+  border:3px solid #000;
+  border-radius:0.75rem;
+  box-shadow:
+    6px 6px 0 rgba(0,0,0,.5),
+    0 30px 60px rgba(0,0,0,.35);
+  padding:.5rem .5rem 1rem;
+  text-align:center;
+  font-size:.7rem;
+  font-weight:600;
+  color:#000;
+  line-height:1.3;
+  z-index:2; /* behind main content (z=3) but above header-bg (z=1) */
+}
+
+.floater img {
+  width:100%;
+  height:auto;
+  border-radius:.5rem;
+  display:block;
+  box-shadow:0 10px 20px rgba(0,0,0,.25);
+  background:#fff;
+  object-fit:cover;
+}
+
+.floater span {
+  display:block;
+  margin-top:.4rem;
+  word-break:break-word;
+  font-weight:600;
+  color:#000;
+}
+
+/* placements + tilts for desktop */
+.floater.f1 { top:140px; left:-130px; transform:rotate(-7deg); }
+.floater.f2 { top:480px; right:-140px; transform:rotate(5deg); }
+.floater.f3 { top:850px; left:-120px; transform:rotate(-4deg); }
+.floater.f4 { top:1200px; right:-130px; transform:rotate(6deg); }
+.floater.f5 { top:1550px; left:-100px; transform:rotate(-5deg); }
+
+/* on phones: center & fade them so text stays readable */
+@media(max-width:800px){
+  .floater {
+    left:50% !important;
+    right:auto !important;
+    transform:translateX(-50%) rotate(0deg) !important;
+    width:180px;
+    max-width:65vw;
+    opacity:.15;
+    z-index:1; /* drop them behind content more on mobile */
+  }
+  .floater.f1 { top:140px; }
+  .floater.f2 { top:480px; }
+  .floater.f3 { top:820px; }
+  .floater.f4 { top:1180px; }
+  .floater.f5 { top:1500px; }
+}
 </style>
 </head>
 <body>
 <main class="page-wrap">
+
+  <!-- floating polaroid-style photos
+       IMPORTANT: upload these files next to index.html with these exact names:
+       logo.png
+       chess-teacher.jpg  (group of kids w/ instructor)
+       chess.webp         (2 kids playing chess at table)
+       ladder.jpg         (ladder / hurdles)
+       squats.jpg         (2 kids squatting indoors)
+       pushups.jpg        (kid doing pushup/plank)
+  -->
+
+  <div class="floater f1">
+    <img src="chess-teacher.jpg" alt="Kids learning chess with coach">
+    <span>Thinking before moving.</span>
+  </div>
+
+  <div class="floater f2">
+    <img src="chess.webp" alt="Kids playing chess and smiling">
+    <span>Strategy &amp; patience.</span>
+  </div>
+
+  <div class="floater f3">
+    <img src="ladder.jpg" alt="Footwork and coordination drills">
+    <span>Speed + balance.</span>
+  </div>
+
+  <div class="floater f4">
+    <img src="squats.jpg" alt="Kids doing bodyweight squats">
+    <span>Strong &amp; confident.</span>
+  </div>
+
+  <div class="floater f5">
+    <img src="pushups.jpg" alt="Building core strength and focus">
+    <span>We don’t quit.</span>
+  </div>
+
   <div class="header-bg"></div>
 
   <header>
 
-    <!-- jagged comic starburst free session -->
+    <!-- UPGRADED BURST -->
     <div class="burst-wrap">
       <div class="burst-button" id="openFormBurst">
         First Session is FREE!
@@ -517,12 +654,11 @@ textarea{min-height:5rem;resize:vertical;}
       </div>
     </div>
 
-    <!-- LOGO IMAGE (large, centered). 
-         IMPORTANT: file must be committed in repo root as logo.png -->
+    <!-- LOGO (large, centered). logo.png must exist in repo root -->
     <div class="logo-block">
       <img
         src="logo.png"
-        alt="Checkmate Fitness - Every Move Counts"
+        alt="Checkmate Fitness logo"
       />
     </div>
 
@@ -646,9 +782,9 @@ const closeBtn = document.getElementById('closeModalBtn');
 function openModal() { modal.style.display = 'flex'; }
 function closeModal() { modal.style.display = 'none'; }
 
-openBtn.addEventListener('click', openModal);
-openBurst.addEventListener('click', openModal);
-closeBtn.addEventListener('click', closeModal);
+if (openBtn)   openBtn.addEventListener('click', openModal);
+if (openBurst) openBurst.addEventListener('click', openModal);
+if (closeBtn)  closeBtn.addEventListener('click', closeModal);
 
 modal.addEventListener('click', (e) => {
   if (e.target === modal) { closeModal(); }
