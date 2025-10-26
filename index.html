@@ -14,7 +14,6 @@
   --radius-xl: 1.5rem;
   --radius-lg: 1rem;
   --grid-size: 28px;
-  --polaroid-bg: #fff;
 }
 
 /* reset */
@@ -54,7 +53,6 @@ body {
   flex-direction:column;
   position:relative;
   isolation:isolate;
-  overflow:hidden; /* keep floated pics from causing scrollbars */
 }
 @media(min-width:600px){
   .page-wrap{padding:3rem 3rem 4rem;}
@@ -99,7 +97,6 @@ header {
   justify-content:center;
   width:100%;
   margin-top:100px; /* sits just below checker strip */
-  z-index:3;
 }
 
 .burst-button {
@@ -191,7 +188,6 @@ header {
   margin:1rem auto 1rem;
   max-width:400px;
   width:100%;
-  z-index:3;
 }
 
 .logo-block img {
@@ -209,7 +205,6 @@ header {
   line-height:1.15;
   text-align:center;
   letter-spacing:-0.04em;
-  z-index:3;
 }
 
 .hero-sub{
@@ -220,7 +215,6 @@ header {
   font-weight:500;
   color:var(--text-mid);
   text-align:center;
-  z-index:3;
 }
 
 /* service area ribbon */
@@ -239,15 +233,11 @@ header {
   text-transform:uppercase;
   letter-spacing:.03em;
   border:3px solid #000;
-  z-index:3;
-  position:relative;
 }
 
 /* sections */
 section{
   margin-top:2.5rem;
-  position:relative;
-  z-index:3;
 }
 
 /* HEADERS: teal letters + thin black outline */
@@ -405,8 +395,6 @@ footer{
   color:#666;
   line-height:1.4;
   margin-top:3rem;
-  position:relative;
-  z-index:3;
 }
 
 /* modal overlay + card */
@@ -446,7 +434,7 @@ footer{
   box-shadow:3px 3px 0 rgba(0,0,0,.4);
 }
 
-/* modal heading style */
+/* modal heading style (teal outlined) */
 .modal-head{
   font-size:1.2rem;
   font-weight:800;
@@ -513,116 +501,10 @@ textarea{min-height:5rem;resize:vertical;}
   text-align:center;
   margin-top:.5rem;
 }
-
-/* ------------------------------------------------ */
-/* FLOATER POLAROID STYLE PHOTOS                   */
-/* ------------------------------------------------ */
-
-.floater {
-  position:absolute;
-  width:200px; /* bigger than before */
-  max-width:42vw;
-  background:var(--polaroid-bg);
-  border:3px solid #000;
-  border-radius:0.75rem;
-  box-shadow:
-    6px 6px 0 rgba(0,0,0,.5),
-    0 30px 60px rgba(0,0,0,.35);
-  padding:.5rem .5rem 1rem; /* extra bottom = polaroid look */
-  text-align:center;
-  font-size:.7rem;
-  font-weight:600;
-  color:#000;
-  line-height:1.3;
-  z-index:0; /* sits behind teal frame & text */
-}
-
-.floater img {
-  width:100%;
-  height:auto;
-  border-radius:.5rem;
-  display:block;
-  box-shadow:0 10px 20px rgba(0,0,0,.25);
-  background:#fff;
-  object-fit:cover;
-}
-
-/* captions */
-.floater span {
-  display:block;
-  margin-top:.4rem;
-  word-break:break-word;
-  font-weight:600;
-  color:#000;
-}
-
-/* new larger positions — bleed outside teal border */
-.floater.f1 { top:140px; left:-130px; transform:rotate(-7deg); }
-.floater.f2 { top:480px; right:-140px; transform:rotate(5deg); }
-.floater.f3 { top:850px; left:-120px; transform:rotate(-4deg); }
-.floater.f4 { top:1200px; right:-130px; transform:rotate(6deg); }
-.floater.f5 { top:1550px; left:-100px; transform:rotate(-5deg); }
-
-/* on phones: center & fade them */
-@media(max-width:800px){
-  .floater {
-    left:50% !important;
-    right:auto !important;
-    transform:translateX(-50%) rotate(0deg) !important;
-    width:180px;
-    max-width:65vw;
-    opacity:.15;
-  }
-  .floater.f1 { top:140px; }
-  .floater.f2 { top:480px; }
-  .floater.f3 { top:820px; }
-  .floater.f4 { top:1180px; }
-  .floater.f5 { top:1500px; }
-}
-
-/* allow overflow so photos can peek out */
-.page-wrap {
-  overflow: visible;
-}
 </style>
 </head>
 <body>
 <main class="page-wrap">
-
-  <!-- floating polaroid-style photos
-       IMPORTANT: upload these files next to index.html with these exact names:
-       chess-teacher.jpg
-       chess.webp
-       ladder.jpg
-       squats.jpg
-       pushups.jpg
-  -->
-
-  <div class="floater f1">
-    <img src="chess-teacher.jpg" alt="Kids learning chess with coach">
-    <span>Thinking before moving.</span>
-  </div>
-
-  <div class="floater f2">
-    <img src="chess.webp" alt="Kids playing chess and smiling">
-    <span>Strategy & patience.</span>
-  </div>
-
-  <div class="floater f3">
-    <img src="ladder.jpg" alt="Footwork and coordination drills">
-    <span>Speed + balance.</span>
-  </div>
-
-  <div class="floater f4">
-    <img src="squats.jpg" alt="Kids doing bodyweight squats">
-    <span>Strong & confident.</span>
-  </div>
-
-  <div class="floater f5">
-    <img src="pushups.jpg" alt="Building core strength">
-    <span>We don’t quit.</span>
-  </div>
-
   <div class="header-bg"></div>
 
   <header>
@@ -636,11 +518,11 @@ textarea{min-height:5rem;resize:vertical;}
     </div>
 
     <!-- LOGO IMAGE (large, centered). 
-         IMPORTANT: Your black logo file must be uploaded as logo.png -->
+         IMPORTANT: file must be committed in repo root as logo.png -->
     <div class="logo-block">
       <img
         src="logo.png"
-        alt="Checkmate Fitness logo"
+        alt="Checkmate Fitness - Every Move Counts"
       />
     </div>
 
