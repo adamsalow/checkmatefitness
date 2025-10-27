@@ -222,12 +222,7 @@ header {
   z-index:3;
 }
 
-/*
-Checker headline:
-- background-clip:text for modern browsers
-- thin black outline
-- fallback to teal text + outline if background-clip fails
-*/
+/* checkerboard headline with outlined text */
 .tagline-main {
   position:relative;
   font-size:clamp(2.5rem,2.5vw + 2rem,3.4rem);
@@ -257,8 +252,6 @@ Checker headline:
      1px  1px 0 #000;
 }
 
-/* Fallback: if some very old browsers ignore background-clip:text
-   they'll just render the inherited color. Force inherit teal there. */
 @supports not ((background-clip:text) or (-webkit-background-clip:text)) {
   .tagline-main {
     color: var(--teal-main) !important;
@@ -272,7 +265,7 @@ Checker headline:
   }
 }
 
-/* subheadline under tagline */
+/* subheadline */
 .brand-headline{
   margin-top:.5rem;
   font-size:clamp(1.2rem,1vw +1rem,1.5rem);
@@ -590,12 +583,6 @@ footer{
   position:relative;
   z-index:3;
 }
-footer .privacy{
-  color:#444;
-  font-size:.7rem;
-  line-height:1.4;
-  margin-top:.4rem;
-}
 
 /* modal overlay + card */
 .modal-overlay{
@@ -703,6 +690,14 @@ textarea{min-height:5rem;resize:vertical;}
 }
 
 /* FLOATING POLAROID-STYLE PHOTOS */
+
+/* NEW ORDER:
+   f1: chess-teacher (chess mindset)
+   f2: ladder (athletic drills)  <-- moved up so top row shows both chess + fitness
+   f3: chess (focus at the board)
+   f4: squats
+   f5: pushups
+*/
 .floater {
   position:absolute;
   width:200px;
@@ -740,12 +735,12 @@ textarea{min-height:5rem;resize:vertical;}
   color:#000;
 }
 
-/* desktop placement */
+/* desktop placement tweaked */
 .floater.f1 { top:140px; left:-130px; transform:rotate(-7deg); }
-.floater.f2 { top:480px; right:-140px; transform:rotate(5deg); }
-.floater.f3 { top:850px; left:-120px; transform:rotate(-4deg); }
-.floater.f4 { top:1200px; right:-130px; transform:rotate(6deg); }
-.floater.f5 { top:1550px; left:-100px; transform:rotate(-5deg); }
+.floater.f2 { top:180px; right:-140px; transform:rotate(5deg); }   /* ladder moved up */
+.floater.f3 { top:560px; left:-120px; transform:rotate(-4deg); }   /* chess moved down */
+.floater.f4 { top:920px; right:-130px; transform:rotate(6deg); }   /* squats next */
+.floater.f5 { top:1280px; left:-100px; transform:rotate(-5deg); }  /* pushups last */
 
 /* mobile: center & fade them under content, push them slightly lower for breathing room */
 @media(max-width:800px){
@@ -759,10 +754,10 @@ textarea{min-height:5rem;resize:vertical;}
     z-index:1;
   }
   .floater.f1 { top:200px; }
-  .floater.f2 { top:520px; }
-  .floater.f3 { top:860px; }
-  .floater.f4 { top:1220px; }
-  .floater.f5 { top:1540px; }
+  .floater.f2 { top:360px; }   /* ladder earlier so movement is visible fast */
+  .floater.f3 { top:640px; }
+  .floater.f4 { top:980px; }
+  .floater.f5 { top:1320px; }
 }
 </style>
 </head>
@@ -776,13 +771,13 @@ textarea{min-height:5rem;resize:vertical;}
   </div>
 
   <div class="floater f2">
-    <img src="chess.jpg" alt="Focused chess battle">
-    <span>Strategy &amp; patience.</span>
+    <img src="ladder.jpg" alt="Footwork and coordination drills">
+    <span>Speed + balance.</span>
   </div>
 
   <div class="floater f3">
-    <img src="ladder.jpg" alt="Footwork and coordination drills">
-    <span>Speed + balance.</span>
+    <img src="chess.jpg" alt="Focused chess battle">
+    <span>Strategy &amp; patience.</span>
   </div>
 
   <div class="floater f4">
@@ -929,8 +924,7 @@ textarea{min-height:5rem;resize:vertical;}
   </section>
 
   <footer>
-    © <span id="year"></span> Checkmate Fitness<br/>
-    <div class="privacy">We never share your info.</div>
+    © <span id="year"></span> Checkmate Fitness
   </footer>
 </main>
 
