@@ -6,7 +6,7 @@
 <title>Checkmate Fitness</title>
 <style>
 :root {
-  --teal-main: #00c9c3;         /* Marlins teal */
+  --teal-main: #00c9c3;         /* Brand teal */
   --text-dark: #0f0f0f;
   --text-mid: #444;
   --bg-page: #ffffff;
@@ -99,12 +99,22 @@ header {
   right:1rem;
   z-index:5;
   pointer-events:auto;
+  transition:transform .15s ease;
+  cursor:pointer;
 }
+.free-circle-wrapper:hover {
+  transform:scale(1.05) rotate(-2deg);
+}
+.free-circle-wrapper:active {
+  transform:scale(0.97) rotate(-2deg);
+}
+
 @media(max-width:520px){
   .free-circle-wrapper{
     position:static;
     order:3;
     margin-top:1rem;
+    transform:none !important;
   }
 }
 
@@ -126,7 +136,6 @@ header {
 
   padding:.75rem;
   line-height:1.15;
-  cursor:pointer;
   position:relative;
   z-index:2;
 }
@@ -189,7 +198,7 @@ header {
   }
 }
 
-/* LOGO (centered again) */
+/* LOGO (centered) */
 .logo-block{
   width:100%;
   max-width:400px;
@@ -202,7 +211,7 @@ header {
   display:block;
 }
 
-/* BIG TAGLINE: Chess + Fitness for Kids */
+/* BIG TAGLINE */
 .tagline-wrapper{
   display:flex;
   flex-direction:column;
@@ -214,17 +223,18 @@ header {
 }
 
 /*
-To make sure the checkerboard fill shows:
-- We force it on the text element itself (not a flex parent)
-- We use background-clip:text and make sure color is transparent
-- We give just a THIN black outline using text-shadow 4-way
+Checker headline:
+- background-clip:text for modern browsers
+- thin black outline
+- fallback to teal text + outline if background-clip fails
 */
 .tagline-main {
-  font-size:clamp(2.5rem,2.5vw + 2rem,3.4rem); /* bigger */
+  position:relative;
+  font-size:clamp(2.5rem,2.5vw + 2rem,3.4rem);
   font-weight:900;
   line-height:1.1;
   letter-spacing:-0.04em;
-  display:inline-block;
+  display:block;
   text-align:center;
   padding:0.25rem 0.5rem;
 
@@ -235,16 +245,24 @@ To make sure the checkerboard fill shows:
       #ffffff 0 50%
     );
   background-size:24px 24px;
-  -webkit-background-clip:text;
-  background-clip:text;
-  color:transparent;
 
-  /* THIN black outline */
+  -webkit-background-clip:text !important;
+  background-clip:text !important;
+  color:transparent !important;
+
   text-shadow:
     -1px -1px 0 #000,
      1px -1px 0 #000,
     -1px  1px 0 #000,
      1px  1px 0 #000;
+}
+
+/* Fallback: if some very old browsers ignore background-clip:text
+   they'll just render the inherited color. Force inherit teal there. */
+@supports not ((background-clip:text) or (-webkit-background-clip:text)) {
+  .tagline-main {
+    color: var(--teal-main) !important;
+  }
 }
 
 @media(max-width:520px){
@@ -265,6 +283,21 @@ To make sure the checkerboard fill shows:
   letter-spacing:-0.04em;
   z-index:3;
   max-width:24ch;
+}
+
+/* Ages pill */
+.age-pill{
+  margin:.75rem auto 0;
+  background:var(--teal-main);
+  color:#000;
+  font-weight:600;
+  display:inline-block;
+  padding:.4rem .7rem;
+  border-radius:0.75rem;
+  font-size:.75rem;
+  line-height:1.2;
+  border:2px solid #000;
+  box-shadow:3px 3px 0 rgba(0,0,0,.5);
 }
 
 .hero-sub{
@@ -365,6 +398,60 @@ section{
      1px  1px 0 #000;
 }
 
+/* philosophy / reassurance card */
+.philosophy-card{
+  background:#fff;
+  border:3px solid #000;
+  border-radius:var(--radius-xl);
+  box-shadow:4px 4px 0 var(--teal-main),0 24px 48px rgba(0,0,0,.12);
+  padding:1rem 1rem .9rem;
+  max-width:750px;
+  margin:2rem auto 0;
+  font-size:1rem;
+  font-weight:500;
+  line-height:1.5;
+  color:var(--text-dark);
+}
+.philosophy-card strong{
+  font-weight:800;
+  color:var(--teal-main);
+  text-shadow:
+    -1px -1px 0 #000,
+     1px -1px 0 #000,
+    -1px  1px 0 #000,
+     1px  1px 0 #000;
+}
+
+/* latin block */
+.latin-block{
+  text-align:center;
+  max-width:600px;
+  margin:2rem auto 0;
+  font-size:.95rem;
+  line-height:1.4;
+  color:var(--text-mid);
+  font-weight:500;
+  background:#fff;
+  border:3px solid #000;
+  border-radius:var(--radius-xl);
+  box-shadow:4px 4px 0 var(--teal-main),0 24px 48px rgba(0,0,0,.12);
+  padding:1rem .9rem 1rem;
+}
+.latin-block .latin{
+  font-style:italic;
+  font-weight:700;
+  color:var(--teal-main);
+  text-shadow:
+    -1px -1px 0 #000,
+     1px -1px 0 #000,
+    -1px  1px 0 #000,
+     1px  1px 0 #000;
+  display:block;
+  font-size:1rem;
+  line-height:1.3;
+  margin-bottom:.4rem;
+}
+
 /* parents card */
 .about-card{
   background:#fff;
@@ -373,7 +460,7 @@ section{
   box-shadow:4px 4px 0 var(--teal-main),0 24px 48px rgba(0,0,0,.12);
   padding:1.25rem 1rem 1rem;
   max-width:750px;
-  margin:0 auto;
+  margin:2.5rem auto 0;
   font-size:1rem;
   font-weight:500;
   line-height:1.5;
@@ -396,6 +483,39 @@ section{
 .about-card ul{padding-left:1rem;}
 .about-card li{margin-bottom:.6rem;}
 
+/* about-me card */
+.about-me-card{
+  background:#fff;
+  border:3px solid #000;
+  border-radius:var(--radius-xl);
+  box-shadow:4px 4px 0 var(--teal-main),0 24px 48px rgba(0,0,0,.12);
+  padding:1.25rem 1rem 1rem;
+  max-width:750px;
+  margin:2.5rem auto 0;
+  font-size:1rem;
+  font-weight:500;
+  line-height:1.5;
+  color:var(--text-dark);
+  text-align:left;
+}
+.about-me-title{
+  font-size:1.2rem;
+  font-weight:800;
+  line-height:1.2;
+  text-align:center;
+  letter-spacing:-0.03em;
+  margin-bottom:.75rem;
+  color:var(--teal-main);
+  text-shadow:
+    -1px -1px 0 #000,
+     1px -1px 0 #000,
+    -1px  1px 0 #000,
+     1px  1px 0 #000;
+}
+.about-me-card p + p{
+  margin-top:.75rem;
+}
+
 /* contact card */
 .contact-card{
   background:#fff;
@@ -404,7 +524,7 @@ section{
   box-shadow:4px 4px 0 var(--teal-main),0 24px 48px rgba(0,0,0,.12);
   padding:1.5rem 1.25rem 1.25rem;
   max-width:750px;
-  margin:0 auto;
+  margin:2.5rem auto 0;
   color:var(--text-dark);
   text-align:center;
 }
@@ -428,6 +548,13 @@ section{
   color:var(--text-dark);
 }
 .contact-lines div{margin-bottom:.5rem;}
+
+.contact-reassure{
+  font-size:.8rem;
+  line-height:1.4;
+  color:#444;
+  margin-top:.5rem;
+}
 
 /* CTA chessboard button */
 .first-free-btn{
@@ -462,6 +589,12 @@ footer{
   margin-top:3rem;
   position:relative;
   z-index:3;
+}
+footer .privacy{
+  color:#444;
+  font-size:.7rem;
+  line-height:1.4;
+  margin-top:.4rem;
 }
 
 /* modal overlay + card */
@@ -614,13 +747,8 @@ textarea{min-height:5rem;resize:vertical;}
 .floater.f4 { top:1200px; right:-130px; transform:rotate(6deg); }
 .floater.f5 { top:1550px; left:-100px; transform:rotate(-5deg); }
 
-/* mobile: center & fade them under content */
+/* mobile: center & fade them under content, push them slightly lower for breathing room */
 @media(max-width:800px){
-  .free-circle-wrapper{
-    position:static;
-    margin-top:1rem;
-  }
-
   .floater {
     left:50% !important;
     right:auto !important;
@@ -630,11 +758,11 @@ textarea{min-height:5rem;resize:vertical;}
     opacity:.15;
     z-index:1;
   }
-  .floater.f1 { top:140px; }
-  .floater.f2 { top:480px; }
-  .floater.f3 { top:820px; }
-  .floater.f4 { top:1180px; }
-  .floater.f5 { top:1500px; }
+  .floater.f1 { top:200px; }
+  .floater.f2 { top:520px; }
+  .floater.f3 { top:860px; }
+  .floater.f4 { top:1220px; }
+  .floater.f5 { top:1540px; }
 }
 </style>
 </head>
@@ -671,7 +799,7 @@ textarea{min-height:5rem;resize:vertical;}
 
   <header>
 
-    <!-- circle badge absolutely positioned in header, not breaking logo centering -->
+    <!-- floating circle badge in header -->
     <div class="free-circle-wrapper" id="openFormCircle">
       <div class="free-circle">
         <div class="free-circle-inner">
@@ -691,16 +819,19 @@ textarea{min-height:5rem;resize:vertical;}
       />
     </div>
 
-    <!-- HUGE TAGLINE with checker fill + thin black outline -->
+    <!-- HUGE TAGLINE -->
     <div class="tagline-wrapper">
       <div class="tagline-main">
         Chess + Fitness for Kids
       </div>
     </div>
 
-    <!-- subheadline -->
     <div class="brand-headline">
       Stronger Bodies. Stronger Minds. Confident Kids.
+    </div>
+
+    <div class="age-pill">
+      Ages 7–14 • All experience levels welcome
     </div>
 
     <div class="hero-sub">
@@ -740,6 +871,19 @@ textarea{min-height:5rem;resize:vertical;}
         Your child practices making decisions under pressure, staying composed, and bouncing back after mistakes.
       </div>
     </div>
+
+    <!-- reassurance / philosophy -->
+    <div class="philosophy-card">
+      <strong>We’re not here to create the next Olympic athlete or chess grandmaster.</strong>
+      We’re here to help kids get moving, think clearly, and feel proud of themselves. Most of our students start with little or no experience. We meet each child where they are, keep it positive, and make progress fun.
+    </div>
+
+    <!-- latin block -->
+    <div class="latin-block">
+      <span class="latin">Mens sana in corpore sano</span>
+      “A sound mind in a sound body.”  
+      We believe that staying active and learning to think under pressure builds confident, focused kids — on the board, in school, and in life.
+    </div>
   </section>
 
   <section id="parents">
@@ -753,6 +897,18 @@ textarea{min-height:5rem;resize:vertical;}
     </div>
   </section>
 
+  <section id="about-me">
+    <div class="about-me-card">
+      <div class="about-me-title">About Me</div>
+      <p>
+        Hi, I’m Adam — coach and founder of Checkmate Fitness. I’ve loved chess and physical training since I was young, and now I use that experience to help the next generation grow stronger and more confident.
+      </p>
+      <p>
+        As a father of six, I know firsthand how meaningful it is to watch kids pick up new skills, learn self-control, and believe in themselves. My goal is simple: make learning fun, build real confidence, and help kids develop habits that last.
+      </p>
+    </div>
+  </section>
+
   <section id="contact">
     <div class="contact-card">
       <div class="contact-head">Ready to Get Started?</div>
@@ -762,6 +918,10 @@ textarea{min-height:5rem;resize:vertical;}
         <div><strong>Service Area:</strong> Middle Tennessee · Mobile Training</div>
       </div>
 
+      <div class="contact-reassure">
+        No contracts. We’ll answer questions and set up a free first session.
+      </div>
+
       <a class="first-free-btn" id="openFormButton">
         Click For Your Free First Session
       </a>
@@ -769,7 +929,8 @@ textarea{min-height:5rem;resize:vertical;}
   </section>
 
   <footer>
-    © <span id="year"></span> Checkmate Fitness
+    © <span id="year"></span> Checkmate Fitness<br/>
+    <div class="privacy">We never share your info.</div>
   </footer>
 </main>
 
@@ -816,14 +977,16 @@ document.getElementById('year').textContent = new Date().getFullYear();
 const modal = document.getElementById('leadModal');
 const openBtn = document.getElementById('openFormButton');
 const circleWrapper = document.getElementById('openFormCircle') || document.querySelector('.free-circle-wrapper');
+const circleClickTarget = document.querySelector('.free-circle-wrapper');
 const closeBtn = document.getElementById('closeModalBtn');
 
 function openModal() { modal.style.display = 'flex'; }
 function closeModal() { modal.style.display = 'none'; }
 
-if (openBtn)        openBtn.addEventListener('click', openModal);
-if (circleWrapper)  circleWrapper.addEventListener('click', openModal);
-if (closeBtn)       closeBtn.addEventListener('click', closeModal);
+if (openBtn)                openBtn.addEventListener('click', openModal);
+if (circleWrapper)          circleWrapper.addEventListener('click', openModal);
+if (circleClickTarget)      circleClickTarget.addEventListener('click', openModal);
+if (closeBtn)               closeBtn.addEventListener('click', closeModal);
 
 modal.addEventListener('click', (e) => {
   if (e.target === modal) { closeModal(); }
