@@ -211,7 +211,7 @@ header {
   display:block;
 }
 
-/* BIG TAGLINE */
+/* TAGLINE WRAPPER */
 .tagline-wrapper{
   display:flex;
   flex-direction:column;
@@ -222,7 +222,7 @@ header {
   z-index:3;
 }
 
-/* checkerboard headline with outlined text */
+/* top headline: now white text with teal outline */
 .tagline-main {
   position:relative;
   font-size:clamp(2.5rem,2.5vw + 2rem,3.4rem);
@@ -233,29 +233,13 @@ header {
   text-align:center;
   padding:0.25rem 0.5rem;
 
-  background:
-    repeating-conic-gradient(
-      from 0deg,
-      var(--teal-main) 0 25%,
-      #ffffff 0 50%
-    );
-  background-size:24px 24px;
-
-  -webkit-background-clip:text !important;
-  background-clip:text !important;
-  color:transparent !important;
-
+  color:#fff;
   text-shadow:
-    -1px -1px 0 #000,
-     1px -1px 0 #000,
-    -1px  1px 0 #000,
-     1px  1px 0 #000;
-}
-
-@supports not ((background-clip:text) or (-webkit-background-clip:text)) {
-  .tagline-main {
-    color: var(--teal-main) !important;
-  }
+    -2px -2px 0 var(--teal-main),
+     2px -2px 0 var(--teal-main),
+    -2px  2px 0 var(--teal-main),
+     2px  2px 0 var(--teal-main),
+    0   0   6px #00000055; /* tiny glow for contrast */
 }
 
 @media(max-width:520px){
@@ -434,11 +418,19 @@ section{
   padding:1rem .9rem;
   text-align:center;
 }
+
+/* titles inside flow steps: now white with black outline */
 .flow-step-title{
   font-weight:800;
   font-size:1rem;
   line-height:1.2;
   margin-bottom:.5rem;
+  color:#fff;
+  text-shadow:
+    -1px -1px 0 #000,
+     1px -1px 0 #000,
+    -1px  1px 0 #000,
+     1px  1px 0 #000;
 }
 .flow-step-desc{
   font-size:.9rem;
@@ -456,16 +448,7 @@ section{
 }
 .flow-step.fit .flow-step-desc{
   color:#000;
-}
-.flow-step.fit .flow-step-title{
-  color:#000;
-  text-shadow:
-    -1px -1px 0 #000,
-     1px -1px 0 #000,
-    -1px  1px 0 #000,
-     1px  1px 0 #000;
-  text-shadow:none;
-  font-weight:800;
+  font-weight:600;
 }
 
 .flow-step.chess{
@@ -476,15 +459,6 @@ section{
       #ffffff 0 50%
     );
   background-size:20px 20px;
-  color:#000;
-}
-.flow-step.chess .flow-step-title{
-  text-shadow:
-    -1px -1px 0 #000,
-     1px -1px 0 #000,
-    -1px  1px 0 #000,
-     1px  1px 0 #000;
-  font-weight:800;
   color:#000;
 }
 .flow-step.chess .flow-step-desc{
@@ -510,7 +484,7 @@ section{
   .flow-arrow{display:block;}
 }
 
-/* flow note under steps */
+/* flow note */
 .flow-note{
   font-size:.8rem;
   line-height:1.4;
@@ -853,11 +827,12 @@ textarea{min-height:5rem;resize:vertical;}
   margin-top:.5rem;
 }
 
-/* FLOATING POLAROID-STYLE PHOTOS (updated order) */
+/* FLOATING POLAROID-STYLE PHOTOS */
+/* Now spaced farther down page + ~10% bigger */
 .floater {
   position:absolute;
-  width:200px;
-  max-width:42vw;
+  width:220px;                /* was 200px */
+  max-width:46vw;
   background:var(--polaroid-bg);
   border:3px solid #000;
   border-radius:0.75rem;
@@ -866,7 +841,7 @@ textarea{min-height:5rem;resize:vertical;}
     0 30px 60px rgba(0,0,0,.35);
   padding:.5rem .5rem 1rem;
   text-align:center;
-  font-size:.7rem;
+  font-size:.75rem;           /* bumped slightly for scale */
   font-weight:600;
   color:#000;
   line-height:1.3;
@@ -889,29 +864,35 @@ textarea{min-height:5rem;resize:vertical;}
   color:#000;
 }
 
-/* desktop placement: top left chess, top right ladder (movement), then chess, squats, pushups */
-.floater.f1 { top:140px; left:-130px; transform:rotate(-7deg); }
-.floater.f2 { top:180px; right:-140px; transform:rotate(5deg); }   /* ladder up high */
-.floater.f3 { top:560px; left:-120px; transform:rotate(-4deg); }   /* chess lower */
-.floater.f4 { top:920px; right:-130px; transform:rotate(6deg); }   /* squats */
-.floater.f5 { top:1280px; left:-100px; transform:rotate(-5deg); }  /* pushups */
+/* desktop placement:
+   f1/f2 near hero
+   f3 around "How a Session Works" / science
+   f4 around About Me
+   f5 near Contact
+*/
+.floater.f1 { top:160px; left:-140px; transform:rotate(-7deg); }
+.floater.f2 { top:200px; right:-150px; transform:rotate(5deg); }
+.floater.f3 { top:900px; left:-140px; transform:rotate(-4deg); }
+.floater.f4 { top:1450px; right:-150px; transform:rotate(6deg); }
+.floater.f5 { top:1950px; left:-130px; transform:rotate(-5deg); }
 
-/* mobile: center, fade, push lower for breathing room */
+/* mobile: center, fade, push lower for breathing room, and also slightly larger */
 @media(max-width:800px){
   .floater {
     left:50% !important;
     right:auto !important;
     transform:translateX(-50%) rotate(0deg) !important;
-    width:180px;
-    max-width:65vw;
+    width:198px;            /* ~10% > 180px */
+    max-width:70vw;
     opacity:.15;
     z-index:1;
+    font-size:.7rem;
   }
-  .floater.f1 { top:200px; }
-  .floater.f2 { top:360px; }
-  .floater.f3 { top:640px; }
-  .floater.f4 { top:980px; }
-  .floater.f5 { top:1320px; }
+  .floater.f1 { top:220px; }
+  .floater.f2 { top:400px; }
+  .floater.f3 { top:900px; }
+  .floater.f4 { top:1500px; }
+  .floater.f5 { top:2050px; }
 }
 </style>
 </head>
@@ -1026,7 +1007,7 @@ textarea{min-height:5rem;resize:vertical;}
       <div class="flow-head">How a Session Works</div>
       <div class="flow-steps">
         <div class="flow-step fit">
-          <div class="flow-step-title">1. Fitness &amp; Movement</div>
+          <div class="flow-step-title">Fitness &amp; Movement</div>
           <div class="flow-step-desc">
             Warm-up, balance, agility, core strength. Energy up, stress down, body engaged.
           </div>
@@ -1035,7 +1016,7 @@ textarea{min-height:5rem;resize:vertical;}
         <div class="flow-arrow">➜</div>
 
         <div class="flow-step chess">
-          <div class="flow-step-title">2. Chess &amp; Strategy</div>
+          <div class="flow-step-title">Chess &amp; Strategy</div>
           <div class="flow-step-desc">
             Think ahead, manage emotions, make smart choices under pressure.
           </div>
@@ -1058,13 +1039,13 @@ textarea{min-height:5rem;resize:vertical;}
       <div class="science-head">Backed by Science</div>
       <ul>
         <li>
-          After even a single short burst of physical activity, kids show sharper attention, better working memory, and stronger self-control for up to about two hours. Scientists link this to increased activity in the prefrontal cortex — the part of the brain that handles focus and decision-making. :contentReference[oaicite:3]{index=3}
+          After even a single short burst of physical activity, kids show sharper attention, better working memory, and stronger self-control for up to about two hours. Exercise activates areas in the brain that handle focus and decision-making.
         </li>
         <li>
-          Movement boosts mood right away: less stress, less irritability, more positive energy, and better emotional self-regulation in children. :contentReference[oaicite:4]{index=4}
+          Movement boosts mood right away: less stress, less irritability, more positive energy, and better emotional self-regulation in children.
         </li>
         <li>
-          Over time, regular physical activity strengthens “executive function,” which includes planning ahead, problem solving, impulse control, and flexible thinking — skills that help in school, sports, and daily life. :contentReference[oaicite:5]{index=5}
+          Over time, regular physical activity strengthens “executive function,” which includes planning ahead, problem solving, impulse control, and flexible thinking — skills that help in school, sports, and daily life.
         </li>
       </ul>
     </div>
@@ -1072,7 +1053,7 @@ textarea{min-height:5rem;resize:vertical;}
     <!-- latin block -->
     <div class="latin-block">
       <span class="latin">Mens sana in corpore sano</span>
-      “A sound mind in a sound body.”  
+      “A sound mind in a sound body.”
       A stronger body supports a clearer, more focused mind — and a trained mind helps kids make better choices with their bodies. We build both, on purpose, every session.
     </div>
   </section>
