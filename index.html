@@ -324,7 +324,7 @@ header {
   position:relative;
 }
 
-/* sections */
+/* general sections */
 section{
   margin-top:2.5rem;
   position:relative;
@@ -391,6 +391,135 @@ section{
      1px  1px 0 #000;
 }
 
+/* HOW A SESSION WORKS (flow) */
+.flow-wrap{
+  max-width:780px;
+  margin:2rem auto 0;
+  text-align:center;
+}
+.flow-head{
+  font-size:1.2rem;
+  font-weight:800;
+  line-height:1.2;
+  color:var(--teal-main);
+  text-shadow:
+    -1px -1px 0 #000,
+     1px -1px 0 #000,
+    -1px  1px 0 #000,
+     1px  1px 0 #000;
+  margin-bottom:1rem;
+  letter-spacing:-0.03em;
+}
+.flow-steps{
+  display:flex;
+  flex-direction:column;
+  align-items:stretch;
+  gap:1rem;
+}
+@media(min-width:600px){
+  .flow-steps{
+    flex-direction:row;
+    align-items:center;
+    justify-content:center;
+    gap:1rem;
+  }
+}
+.flow-step{
+  flex:1;
+  min-width:0;
+  background:#fff;
+  border:3px solid #000;
+  border-radius:var(--radius-xl);
+  box-shadow:4px 4px 0 var(--teal-main),0 24px 48px rgba(0,0,0,.12);
+  padding:1rem .9rem;
+  text-align:center;
+}
+.flow-step-title{
+  font-weight:800;
+  font-size:1rem;
+  line-height:1.2;
+  margin-bottom:.5rem;
+}
+.flow-step-desc{
+  font-size:.9rem;
+  font-weight:500;
+  line-height:1.4;
+  color:var(--text-mid);
+  max-width:26ch;
+  margin:0 auto;
+}
+
+/* special styling per step */
+.flow-step.fit{
+  background:var(--teal-main);
+  color:#000;
+}
+.flow-step.fit .flow-step-desc{
+  color:#000;
+}
+.flow-step.fit .flow-step-title{
+  color:#000;
+  text-shadow:
+    -1px -1px 0 #000,
+     1px -1px 0 #000,
+    -1px  1px 0 #000,
+     1px  1px 0 #000;
+  text-shadow:none;
+  font-weight:800;
+}
+
+.flow-step.chess{
+  background:
+    repeating-conic-gradient(
+      from 0deg,
+      var(--teal-main) 0 25%,
+      #ffffff 0 50%
+    );
+  background-size:20px 20px;
+  color:#000;
+}
+.flow-step.chess .flow-step-title{
+  text-shadow:
+    -1px -1px 0 #000,
+     1px -1px 0 #000,
+    -1px  1px 0 #000,
+     1px  1px 0 #000;
+  font-weight:800;
+  color:#000;
+}
+.flow-step.chess .flow-step-desc{
+  color:#000;
+  font-weight:600;
+}
+
+/* arrow between steps (desktop only) */
+.flow-arrow{
+  display:none;
+  font-size:2rem;
+  font-weight:900;
+  line-height:1;
+  color:#000;
+  text-shadow:
+    3px 3px 0 var(--teal-main),
+    -1px -1px 0 #000,
+     1px -1px 0 #000,
+    -1px  1px 0 #000,
+     1px  1px 0 #000;
+}
+@media(min-width:600px){
+  .flow-arrow{display:block;}
+}
+
+/* flow note under steps */
+.flow-note{
+  font-size:.8rem;
+  line-height:1.4;
+  font-weight:500;
+  color:#444;
+  max-width:38ch;
+  margin:1rem auto 0;
+}
+
 /* philosophy / reassurance card */
 .philosophy-card{
   background:#fff;
@@ -413,6 +542,41 @@ section{
      1px -1px 0 #000,
     -1px  1px 0 #000,
      1px  1px 0 #000;
+}
+
+/* BACKED BY SCIENCE */
+.science-card{
+  background:#fff;
+  border:3px solid #000;
+  border-radius:var(--radius-xl);
+  box-shadow:4px 4px 0 var(--teal-main),0 24px 48px rgba(0,0,0,.12);
+  padding:1.25rem 1rem 1rem;
+  max-width:750px;
+  margin:2.5rem auto 0;
+  font-size:.95rem;
+  font-weight:500;
+  line-height:1.5;
+  color:var(--text-dark);
+}
+.science-head{
+  font-size:1.1rem;
+  font-weight:800;
+  line-height:1.2;
+  letter-spacing:-0.03em;
+  color:var(--teal-main);
+  text-align:center;
+  margin-bottom:.75rem;
+  text-shadow:
+    -1px -1px 0 #000,
+     1px -1px 0 #000,
+    -1px  1px 0 #000,
+     1px  1px 0 #000;
+}
+.science-card ul{
+  padding-left:1rem;
+}
+.science-card li{
+  margin-bottom:.6rem;
 }
 
 /* latin block */
@@ -689,15 +853,7 @@ textarea{min-height:5rem;resize:vertical;}
   margin-top:.5rem;
 }
 
-/* FLOATING POLAROID-STYLE PHOTOS */
-
-/* NEW ORDER:
-   f1: chess-teacher (chess mindset)
-   f2: ladder (athletic drills)  <-- moved up so top row shows both chess + fitness
-   f3: chess (focus at the board)
-   f4: squats
-   f5: pushups
-*/
+/* FLOATING POLAROID-STYLE PHOTOS (updated order) */
 .floater {
   position:absolute;
   width:200px;
@@ -716,7 +872,6 @@ textarea{min-height:5rem;resize:vertical;}
   line-height:1.3;
   z-index:2; /* behind main text (z=3), above checker bg (z=1) */
 }
-
 .floater img {
   width:100%;
   height:auto;
@@ -726,7 +881,6 @@ textarea{min-height:5rem;resize:vertical;}
   background:#fff;
   object-fit:cover;
 }
-
 .floater span {
   display:block;
   margin-top:.4rem;
@@ -735,14 +889,14 @@ textarea{min-height:5rem;resize:vertical;}
   color:#000;
 }
 
-/* desktop placement tweaked */
+/* desktop placement: top left chess, top right ladder (movement), then chess, squats, pushups */
 .floater.f1 { top:140px; left:-130px; transform:rotate(-7deg); }
-.floater.f2 { top:180px; right:-140px; transform:rotate(5deg); }   /* ladder moved up */
-.floater.f3 { top:560px; left:-120px; transform:rotate(-4deg); }   /* chess moved down */
-.floater.f4 { top:920px; right:-130px; transform:rotate(6deg); }   /* squats next */
-.floater.f5 { top:1280px; left:-100px; transform:rotate(-5deg); }  /* pushups last */
+.floater.f2 { top:180px; right:-140px; transform:rotate(5deg); }   /* ladder up high */
+.floater.f3 { top:560px; left:-120px; transform:rotate(-4deg); }   /* chess lower */
+.floater.f4 { top:920px; right:-130px; transform:rotate(6deg); }   /* squats */
+.floater.f5 { top:1280px; left:-100px; transform:rotate(-5deg); }  /* pushups */
 
-/* mobile: center & fade them under content, push them slightly lower for breathing room */
+/* mobile: center, fade, push lower for breathing room */
 @media(max-width:800px){
   .floater {
     left:50% !important;
@@ -754,7 +908,7 @@ textarea{min-height:5rem;resize:vertical;}
     z-index:1;
   }
   .floater.f1 { top:200px; }
-  .floater.f2 { top:360px; }   /* ladder earlier so movement is visible fast */
+  .floater.f2 { top:360px; }
   .floater.f3 { top:640px; }
   .floater.f4 { top:980px; }
   .floater.f5 { top:1320px; }
@@ -867,17 +1021,59 @@ textarea{min-height:5rem;resize:vertical;}
       </div>
     </div>
 
+    <!-- HOW A SESSION WORKS -->
+    <div class="flow-wrap">
+      <div class="flow-head">How a Session Works</div>
+      <div class="flow-steps">
+        <div class="flow-step fit">
+          <div class="flow-step-title">1. Fitness &amp; Movement</div>
+          <div class="flow-step-desc">
+            Warm-up, balance, agility, core strength. Energy up, stress down, body engaged.
+          </div>
+        </div>
+
+        <div class="flow-arrow">➜</div>
+
+        <div class="flow-step chess">
+          <div class="flow-step-title">2. Chess &amp; Strategy</div>
+          <div class="flow-step-desc">
+            Think ahead, manage emotions, make smart choices under pressure.
+          </div>
+        </div>
+      </div>
+
+      <div class="flow-note">
+        Want just one part? We can do fitness-only or chess-only sessions, too.
+      </div>
+    </div>
+
     <!-- reassurance / philosophy -->
     <div class="philosophy-card">
       <strong>We’re not here to create the next Olympic athlete or chess grandmaster.</strong>
       We’re here to help kids get moving, think clearly, and feel proud of themselves. Most of our students start with little or no experience. We meet each child where they are, keep it positive, and make progress fun.
     </div>
 
+    <!-- BACKED BY SCIENCE -->
+    <div class="science-card">
+      <div class="science-head">Backed by Science</div>
+      <ul>
+        <li>
+          After even a single short burst of physical activity, kids show sharper attention, better working memory, and stronger self-control for up to about two hours. Scientists link this to increased activity in the prefrontal cortex — the part of the brain that handles focus and decision-making. :contentReference[oaicite:3]{index=3}
+        </li>
+        <li>
+          Movement boosts mood right away: less stress, less irritability, more positive energy, and better emotional self-regulation in children. :contentReference[oaicite:4]{index=4}
+        </li>
+        <li>
+          Over time, regular physical activity strengthens “executive function,” which includes planning ahead, problem solving, impulse control, and flexible thinking — skills that help in school, sports, and daily life. :contentReference[oaicite:5]{index=5}
+        </li>
+      </ul>
+    </div>
+
     <!-- latin block -->
     <div class="latin-block">
       <span class="latin">Mens sana in corpore sano</span>
       “A sound mind in a sound body.”  
-      We believe that staying active and learning to think under pressure builds confident, focused kids — on the board, in school, and in life.
+      A stronger body supports a clearer, more focused mind — and a trained mind helps kids make better choices with their bodies. We build both, on purpose, every session.
     </div>
   </section>
 
@@ -885,9 +1081,9 @@ textarea{min-height:5rem;resize:vertical;}
     <div class="about-card">
       <div class="about-title">For Parents</div>
       <ul>
-        <li>Girls are absolutely encouraged to join. Confidence and leadership are for everyone.</li>
-        <li>No experience required. We start simple and build up at their pace.</li>
         <li>We come to you in Middle Tennessee. Parents are always welcome to watch.</li>
+        <li>No experience required. We start simple and build up at their pace.</li>
+        <li>Girls are absolutely encouraged to join. Confidence and leadership are for everyone.</li>
       </ul>
     </div>
   </section>
