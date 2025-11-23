@@ -115,7 +115,7 @@ section{margin-top:2.5rem;position:relative;z-index:3}
 /* DID YOU KNOW? — give wrapper height so next section never overlaps */
 .didyou-wrap{
   position:relative;max-width:860px;margin:2rem auto 0;min-height:1px;
-  padding-bottom:200px;                 /* << adds space below the balloon */
+  padding-bottom:200px;
   z-index:1000;
 }
 .didyou-balloon{
@@ -136,7 +136,6 @@ section{margin-top:2.5rem;position:relative;z-index:3}
 .didyou-visuals{display:flex;align-items:center;gap:.5rem;margin-bottom:.4rem}
 .big-q{font-weight:900;font-size:2.2rem;line-height:1;color:#fff;text-shadow:-2px -2px 0 var(--teal-main),2px -2px 0 var(--teal-main),-2px 2px 0 var(--teal-main),2px 2px 0 var(--teal-main)}
 .helmet{width:40px;height:32px;flex:0 0 auto;filter:drop-shadow(2px 2px 0 #000)}
-
 /* Small screens: stack balloon and remove tail dots */
 @media(max-width:900px){
   .didyou-balloon{position:relative;right:auto;top:auto;transform:none;margin:1rem auto 0}
@@ -150,7 +149,7 @@ section{margin-top:2.5rem;position:relative;z-index:3}
   box-shadow:4px 4px 0 var(--teal-main),0 24px 48px rgba(0,0,0,.12);
   padding:1.25rem 1rem 1rem;max-width:750px;margin:2.5rem auto 0;
   font-size:1rem;font-weight:500;line-height:1.5;color:var(--text-dark);
-  text-align:center;                     /* << center the content */
+  text-align:center;
 }
 .about-title{
   font-size:1.2rem;font-weight:800;line-height:1.2;text-align:center;letter-spacing:-.03em;margin-bottom:.75rem;color:var(--teal-main);
@@ -158,16 +157,101 @@ section{margin-top:2.5rem;position:relative;z-index:3}
 }
 .about-card ul{
   list-style:disc inside;
-  display:inline-block;                  /* << center the list block */
-  text-align:left;                       /* << keep bullets aligned left inside */
+  display:inline-block;
+  text-align:left;
   margin:0 auto;
 }
 .about-card li{margin-bottom:.6rem}
 
-/* about me */
-.about-me-card{background:#fff;border:3px solid #000;border-radius:var(--radius-xl);box-shadow:4px 4px 0 var(--teal-main),0 24px 48px rgba(0,0,0,.12);padding:1.25rem 1rem 1rem;max-width:750px;margin:2.5rem auto 0;font-size:1rem;font-weight:500;line-height:1.5;color:var(--text-dark);text-align:left}
+/* about me + photo layout */
+.about-me-layout{
+  max-width:750px;
+  margin:2.5rem auto 0;
+  display:flex;
+  gap:1.25rem;
+  align-items:stretch;
+  flex-wrap:wrap;
+}
+.about-photo-card{
+  flex:0 0 220px;
+  max-width:220px;
+  background:#fff;
+  border:3px solid #000;
+  border-radius:1.25rem;
+  box-shadow:6px 6px 0 rgba(0,0,0,.5),0 30px 60px rgba(0,0,0,.25);
+  padding:.6rem .6rem .75rem;
+  text-align:center;
+}
+.about-photo-card img{
+  width:100%;
+  height:auto;
+  border-radius:1rem;
+  display:block;
+  object-fit:cover;
+}
+.about-photo-caption{
+  margin-top:.4rem;
+  font-size:.8rem;
+  font-weight:600;
+  color:#111;
+}
+.about-me-card{
+  background:#fff;border:3px solid #000;border-radius:var(--radius-xl);box-shadow:4px 4px 0 var(--teal-main),0 24px 48px rgba(0,0,0,.12);padding:1.25rem 1rem 1rem;max-width:750px;font-size:1rem;font-weight:500;line-height:1.5;color:var(--text-dark);text-align:left;flex:1;margin:0;
+}
 .about-me-title{font-size:1.2rem;font-weight:800;line-height:1.2;text-align:center;letter-spacing:-.03em;margin-bottom:.75rem;color:var(--teal-main);text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000}
 .about-me-card p + p{margin-top:.75rem}
+
+@media(max-width:700px){
+  .about-me-layout{
+    flex-direction:column;
+    align-items:center;
+  }
+  .about-photo-card{
+    max-width:260px;
+    width:100%;
+  }
+  .about-me-card{
+    width:100%;
+  }
+}
+
+/* certifications card */
+.cert-card{
+  background:#fff;
+  border:3px solid #000;
+  border-radius:var(--radius-xl);
+  box-shadow:4px 4px 0 var(--teal-main),0 24px 48px rgba(0,0,0,.12);
+  padding:1.1rem 1rem 1rem;
+  max-width:750px;
+  margin:1.75rem auto 0;
+  font-size:.95rem;
+  font-weight:500;
+  line-height:1.5;
+  color:var(--text-dark);
+  text-align:left;
+}
+.cert-title{
+  font-size:1.1rem;
+  font-weight:800;
+  line-height:1.2;
+  margin-bottom:.6rem;
+  color:var(--teal-main);
+  text-align:center;
+  letter-spacing:-.03em;
+  text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;
+}
+.cert-list{
+  list-style:none;
+  padding-left:0;
+  margin:0;
+}
+.cert-list li{
+  margin-bottom:.4rem;
+  font-weight:600;
+}
+.cert-badge{
+  margin-right:.35rem;
+}
 
 /* contact */
 .contact-card{background:#fff;border:3px solid #000;border-radius:var(--radius-xl);box-shadow:4px 4px 0 var(--teal-main),0 24px 48px rgba(0,0,0,.12);padding:1.5rem 1.25rem 1.25rem;max-width:750px;margin:2.5rem auto 0;color:#0f0f0f;text-align:center}
@@ -261,7 +345,7 @@ textarea{min-height:5rem;resize:vertical}
           <div class="flow-step-desc">Think ahead, manage emotions, make smart choices under pressure.</div>
         </div>
       </div>
-      <div class="flow-note">Want just one part? We can do fitness-only or chess-only sessions, too.</div>
+      <div class="flow-note">Our program blends equal parts fitness and chess. If you'd like a session that focuses more on one or the other, just ask and we'll tailor it.</div>
     </div>
 
     <div class="philosophy-card">
@@ -326,10 +410,26 @@ textarea{min-height:5rem;resize:vertical}
   </section>
 
   <section id="about-me">
-    <div class="about-me-card">
-      <div class="about-me-title">About Me</div>
-      <p>Hi, I’m Adam — coach and founder of Checkmate Fitness. I’ve loved chess and physical training since I was young, and now I use that experience to help the next generation grow stronger and more confident.</p>
-      <p>As a father of six, I know firsthand how meaningful it is to watch kids pick up new skills, learn self-control, and believe in themselves. My goal is simple: make learning fun, build real confidence, and help kids develop habits that last.</p>
+    <div class="about-me-layout">
+      <div class="about-photo-card">
+        <img src="adam.jpg" alt="Coach Adam, founder of Checkmate Fitness">
+        <div class="about-photo-caption">Coach Adam – Founder, Checkmate Fitness</div>
+      </div>
+      <div class="about-me-card">
+        <div class="about-me-title">About Me</div>
+        <p>Hi, I’m Adam — coach and founder of Checkmate Fitness. I’ve loved chess and physical training since I was young, and now I use that experience to help the next generation grow stronger and more confident.</p>
+        <p>As a father of six, I know firsthand how meaningful it is to watch kids pick up new skills, learn self-control, and believe in themselves. My goal is simple: make learning fun, build real confidence, and help kids develop habits that last.</p>
+        <p>I’m certified in Basic Life Support (BLS – CPR &amp; AED) and hold both Personal Trainer and Youth Fitness certifications through ISSA, so your child’s sessions are safe, age-appropriate, and well planned.</p>
+      </div>
+    </div>
+
+    <div class="cert-card">
+      <div class="cert-title">Credentials &amp; Certifications</div>
+      <ul class="cert-list">
+        <li><span class="cert-badge">🏅</span>ISSA Certified Personal Trainer (CPT)</li>
+        <li><span class="cert-badge">🏅</span>ISSA Youth Fitness Specialist</li>
+        <li><span class="cert-badge">❤️</span>Basic Life Support (BLS) – CPR &amp; AED</li>
+      </ul>
     </div>
   </section>
 
