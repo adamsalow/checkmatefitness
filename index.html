@@ -18,7 +18,7 @@
 }
 
 /* reset */
-*{box-sizing:border-box;margin:0;padding:0;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-font-smoothing:antialiased}
 body{
   font-family:system-ui,-apple-system,BlinkMacSystemFont,"Inter","Roboto","Helvetica Neue",Arial,sans-serif;
   background:var(--bg-page);
@@ -69,6 +69,8 @@ header{margin-bottom:2rem;position:relative;z-index:3;display:flex;flex-directio
 .logo-block img{width:100%;height:auto;display:block}
 
 .tagline-wrapper{display:flex;flex-direction:column;align-items:center;text-align:center;max-width:95%;margin:0 auto 1rem;z-index:3}
+
+/* Keep hero pop (this usually renders fine at large size) */
 .tagline-main{
   font-size:clamp(2.5rem,2.5vw + 2rem,3.4rem);
   font-weight:900;
@@ -76,7 +78,6 @@ header{margin-bottom:2rem;position:relative;z-index:3;display:flex;flex-directio
   letter-spacing:-.03em;
   padding:.25rem .5rem;
   color:#fff;
-  /* keep the hero pop, but cleaner */
   text-shadow:0 4px 14px rgba(0,0,0,.25),
              -2px -2px 0 var(--teal-main),
               2px -2px 0 var(--teal-main),
@@ -96,12 +97,11 @@ header{margin-bottom:2rem;position:relative;z-index:3;display:flex;flex-directio
   max-width:28ch;
 }
 
-/* UPDATED: remove explicit ages */
 .age-pill{
   margin:.75rem auto 0;
   background:var(--teal-main);
   color:#000;
-  font-weight:700;
+  font-weight:800;
   display:inline-block;
   padding:.45rem .75rem;
   border-radius:.75rem;
@@ -114,25 +114,23 @@ header{margin-bottom:2rem;position:relative;z-index:3;display:flex;flex-directio
 .hero-sub{max-width:52ch;margin:.75rem auto 0;font-size:1.05rem;line-height:1.55;font-weight:500;color:var(--text-mid);text-align:center}
 
 .service-area-ribbon{
-  margin:1rem auto 0;background:var(--teal-main);color:#000;font-weight:800;display:inline-block;
+  margin:1rem auto 0;background:var(--teal-main);color:#000;font-weight:900;display:inline-block;
   padding:.6rem .9rem;border-radius:var(--radius-lg);font-size:.8rem;line-height:1.2;
   box-shadow:0 20px 40px rgba(0,0,0,.25),4px 4px 0 rgba(0,0,0,.6);
   text-align:center;text-transform:uppercase;letter-spacing:.03em;border:3px solid #000;position:relative
 }
 
-/* ---------- cleaner heading style (fixes blur) ---------- */
-.outline-teal{
+/* ---------- NEW: crisp heading style (no stroke/shadow artifacts) ---------- */
+.h2-teal{
   color:var(--teal-main);
   font-weight:900;
   letter-spacing:-.02em;
-  /* crisp outline (no “smear”) */
-  text-shadow:
-    -1px 0 0 #000,
-     1px 0 0 #000,
-     0 -1px 0 #000,
-     0  1px 0 #000;
-  /* helps in some browsers, ignored safely in others */
-  -webkit-text-stroke: .6px #000;
+  line-height:1.1;
+}
+.h2-bar{
+  display:inline-block;
+  padding-bottom:.25rem;
+  border-bottom:4px solid rgba(0,201,195,.55);
 }
 
 /* sections */
@@ -140,9 +138,6 @@ section{margin-top:2.5rem;position:relative;z-index:3}
 .section-head{text-align:center;margin-bottom:1.5rem}
 .section-head h2{
   font-size:1.55rem;
-  font-weight:900;
-  line-height:1.1;
-  letter-spacing:-.02em;
   margin-bottom:.5rem;
 }
 .section-head p{font-size:1rem;line-height:1.5;color:var(--text-mid);font-weight:500;max-width:50ch;margin:0 auto}
@@ -156,6 +151,7 @@ section{margin-top:2.5rem;position:relative;z-index:3}
   font-weight:900;
   line-height:1.15;
   margin-bottom:.55rem;
+  color:var(--teal-main);
 }
 
 /* programs / pivot clarity */
@@ -177,6 +173,7 @@ section{margin-top:2.5rem;position:relative;z-index:3}
   font-size:1.05rem;
   line-height:1.15;
   margin-bottom:.4rem;
+  color:var(--teal-main);
 }
 .program-desc{font-size:.95rem;font-weight:500;line-height:1.45;color:#333}
 
@@ -188,37 +185,31 @@ section{margin-top:2.5rem;position:relative;z-index:3}
   line-height:1.15;
   letter-spacing:-.02em;
   margin-bottom:1rem;
+  color:var(--teal-main);
 }
 .flow-steps{display:flex;flex-direction:column;align-items:stretch;gap:1rem}
 @media(min-width:600px){.flow-steps{flex-direction:row;align-items:center;justify-content:center;gap:1rem}}
 .flow-step{flex:1;min-width:0;background:#fff;border:3px solid #000;border-radius:var(--radius-xl);box-shadow:4px 4px 0 var(--teal-main),0 24px 48px rgba(0,0,0,.12);padding:1rem .9rem;text-align:center}
+
+/* Clean titles: pill label instead of stroke */
 .flow-step-title{
+  display:inline-block;
   font-weight:900;
   font-size:1.05rem;
   line-height:1.2;
   margin-bottom:.55rem;
-  color:#fff;
-  text-shadow:0 2px 10px rgba(0,0,0,.22);
-  -webkit-text-stroke: .8px #000;
-}
-.flow-step-desc{font-size:.92rem;font-weight:500;line-height:1.4;color:var(--text-mid);max-width:30ch;margin:0 auto}
-.flow-step.fit{background:var(--teal-main);color:#000}
-.flow-step.fit .flow-step-desc{color:#000;font-weight:600}
-
-/* UPDATED: remove checkered from small areas (clean solid instead) */
-.flow-step.chess{
-  background:#fff;
-  border:3px solid #000;
-}
-.flow-step.chess .flow-step-title{
-  color:#fff;
-  background:var(--teal-main);
-  display:inline-block;
   padding:.25rem .6rem;
   border-radius:.6rem;
   border:2px solid #000;
+  background:var(--teal-main);
+  color:#000;
   box-shadow:3px 3px 0 rgba(0,0,0,.35);
 }
+.flow-step-desc{font-size:.92rem;font-weight:500;line-height:1.4;color:var(--text-mid);max-width:30ch;margin:0 auto}
+.flow-step.fit{background:#fff}
+.flow-step.fit .flow-step-desc{color:#000;font-weight:600}
+
+.flow-step.chess{background:#fff}
 .flow-step.chess .flow-step-desc{color:#000;font-weight:600}
 
 .flow-arrow{display:none;font-size:2rem;font-weight:900;line-height:1;color:#000;text-shadow:3px 3px 0 var(--teal-main)}
@@ -227,11 +218,11 @@ section{margin-top:2.5rem;position:relative;z-index:3}
 
 /* philosophy */
 .philosophy-card{background:#fff;border:3px solid #000;border-radius:var(--radius-xl);box-shadow:4px 4px 0 var(--teal-main),0 24px 48px rgba(0,0,0,.12);padding:1rem 1rem .9rem;max-width:750px;margin:2rem auto 0;font-size:1rem;font-weight:500;line-height:1.55;color:var(--text-dark)}
-.philosophy-card strong{font-weight:900}
+.philosophy-card strong{font-weight:900;color:var(--teal-main)}
 
 /* science */
 .science-card{background:#fff;border:3px solid #000;border-radius:var(--radius-xl);box-shadow:4px 4px 0 var(--teal-main),0 24px 48px rgba(0,0,0,.12);padding:1.25rem 1rem 1rem;max-width:750px;margin:2.5rem auto 0;font-size:.95rem;font-weight:500;line-height:1.55;color:var(--text-dark)}
-.science-head{font-size:1.2rem;font-weight:900;line-height:1.15;letter-spacing:-.02em;text-align:center;margin-bottom:.75rem}
+.science-head{font-size:1.2rem;font-weight:900;line-height:1.15;letter-spacing:-.02em;text-align:center;margin-bottom:.75rem;color:var(--teal-main)}
 .science-card ul{padding-left:1rem}
 .science-card li{margin-bottom:.6rem}
 
@@ -250,15 +241,13 @@ section{margin-top:2.5rem;position:relative;z-index:3}
   content:"";position:absolute;bottom:-18px;right:40px;width:18px;height:18px;background:#fff;border:3px solid #000;border-radius:50%;
 }
 .didyou-balloon:before{bottom:-34px;right:28px;width:12px;height:12px}
-.didyou-title{font-size:1rem;font-weight:900;letter-spacing:.02em;display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem;color:#fff}
+.didyou-title{font-size:1rem;font-weight:900;letter-spacing:.02em;display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem;color:#000}
 .didyou-title .title-chip{
-  background:var(--teal-main);border:3px solid #000;border-radius:.6rem;padding:.15rem .6rem;color:#fff;
-  text-shadow:0 2px 10px rgba(0,0,0,.22);
-  -webkit-text-stroke:.7px #000;
+  background:var(--teal-main);border:3px solid #000;border-radius:.6rem;padding:.15rem .6rem;color:#000;
   box-shadow:3px 3px 0 rgba(0,0,0,.45)
 }
 .didyou-visuals{display:flex;align-items:center;gap:.5rem;margin-bottom:.4rem}
-.big-q{font-weight:900;font-size:2.2rem;line-height:1;color:#fff;text-shadow:-2px -2px 0 var(--teal-main),2px -2px 0 var(--teal-main),-2px 2px 0 var(--teal-main),2px 2px 0 var(--teal-main)}
+.big-q{font-weight:900;font-size:2.2rem;line-height:1;color:var(--teal-main)}
 .helmet{width:40px;height:32px;flex:0 0 auto;filter:drop-shadow(2px 2px 0 #000)}
 @media(max-width:900px){
   .didyou-balloon{position:relative;right:auto;top:auto;transform:none;margin:1rem auto 0}
@@ -276,6 +265,7 @@ section{margin-top:2.5rem;position:relative;z-index:3}
 }
 .about-title{
   font-size:1.25rem;font-weight:900;line-height:1.15;text-align:center;letter-spacing:-.02em;margin-bottom:.75rem;
+  color:var(--teal-main);
 }
 .about-card ul{
   list-style:disc inside;
@@ -323,7 +313,7 @@ section{margin-top:2.5rem;position:relative;z-index:3}
   padding:1.25rem 1rem 1rem;max-width:750px;font-size:1rem;font-weight:500;line-height:1.55;color:var(--text-dark);
   text-align:left;flex:1;margin:0;
 }
-.about-me-title{font-size:1.25rem;font-weight:900;line-height:1.15;text-align:center;letter-spacing:-.02em;margin-bottom:.75rem}
+.about-me-title{font-size:1.25rem;font-weight:900;line-height:1.15;text-align:center;letter-spacing:-.02em;margin-bottom:.75rem;color:var(--teal-main)}
 .about-me-card p + p{margin-top:.75rem}
 
 @media(max-width:700px){
@@ -339,20 +329,19 @@ section{margin-top:2.5rem;position:relative;z-index:3}
   padding:1.1rem 1rem 1rem;max-width:750px;margin:1.75rem auto 0;
   font-size:.95rem;font-weight:500;line-height:1.5;color:var(--text-dark);text-align:left;
 }
-.cert-title{font-size:1.15rem;font-weight:900;line-height:1.15;margin-bottom:.6rem;text-align:center;letter-spacing:-.02em}
+.cert-title{font-size:1.15rem;font-weight:900;line-height:1.15;margin-bottom:.6rem;text-align:center;letter-spacing:-.02em;color:var(--teal-main)}
 .cert-list{list-style:none;padding-left:0;margin:0}
 .cert-list li{margin-bottom:.4rem;font-weight:700}
 .cert-badge{margin-right:.35rem}
 
 /* contact */
 .contact-card{background:#fff;border:3px solid #000;border-radius:var(--radius-xl);box-shadow:4px 4px 0 var(--teal-main),0 24px 48px rgba(0,0,0,.12);padding:1.5rem 1.25rem 1.25rem;max-width:750px;margin:2.5rem auto 0;color:#0f0f0f;text-align:center}
-.contact-head{font-size:1.35rem;font-weight:900;line-height:1.15;letter-spacing:-.02em;margin-bottom:.75rem}
+.contact-head{font-size:1.35rem;font-weight:900;line-height:1.15;letter-spacing:-.02em;margin-bottom:.75rem;color:var(--teal-main)}
 .contact-lines{font-size:1rem;font-weight:500;line-height:1.5;color:#0f0f0f}
 .contact-lines div{margin-bottom:.5rem}
 .contact-reassure{font-size:.85rem;line-height:1.45;color:#444;margin-top:.5rem}
 .contact-group-line{margin-top:.75rem;font-size:.92rem;font-weight:900;color:#000}
 
-/* UPDATED: remove checkered from the button */
 .first-free-btn{
   display:inline-block;
   font-size:1rem;
@@ -378,7 +367,7 @@ footer{text-align:center;font-size:.7rem;font-weight:500;color:#666;line-height:
 .modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;padding:1rem;z-index:10000}
 .modal-card{width:100%;max-width:400px;background:#fff;border-radius:var(--radius-xl);border:4px solid #000;box-shadow:4px 4px 0 var(--teal-main),0 40px 120px rgba(0,0,0,.5);padding:1.25rem 1rem 1rem;position:relative}
 .modal-close{position:absolute;top:.5rem;right:.75rem;background:var(--teal-main);border:3px solid #000;font-size:1rem;font-weight:900;color:#000;cursor:pointer;border-radius:.5rem;line-height:1;padding:.25rem .5rem;box-shadow:3px 3px 0 rgba(0,0,0,.4)}
-.modal-head{font-size:1.2rem;font-weight:900;line-height:1.2;text-align:center;margin-bottom:.5rem}
+.modal-head{font-size:1.2rem;font-weight:900;line-height:1.2;text-align:center;margin-bottom:.5rem;color:var(--teal-main)}
 .modal-desc{font-size:.9rem;font-weight:500;line-height:1.4;color:#444;text-align:center;margin-bottom:1rem}
 form.modal-form{display:grid;gap:.75rem}
 label{font-size:.8rem;font-weight:700;color:#0f0f0f;margin-bottom:.25rem;display:block}
@@ -425,7 +414,7 @@ textarea{min-height:5rem;resize:vertical}
 
     <div class="brand-headline">Stronger Bodies. Stronger Minds. Confident Kids.</div>
 
-    <!-- UPDATED: removed “Ages 7–14” -->
+    <!-- Ages removed -->
     <div class="age-pill">Kids • All experience levels welcome</div>
 
     <div class="hero-sub">We help kids grow through movement, strategy, and focused play. Your child builds confidence, patience, self-control, problem-solving — and has fun doing it.</div>
@@ -434,26 +423,26 @@ textarea{min-height:5rem;resize:vertical}
 
   <section id="programs">
     <div class="section-head">
-      <h2 class="outline-teal">Ways to Train</h2>
+      <h2 class="h2-teal"><span class="h2-bar">Ways to Train</span></h2>
       <p>We offer chess training, fitness training, and our signature Chess + Fitness program — which blends both and is what we recommend for most kids.</p>
     </div>
 
     <div class="program-grid">
       <div class="program-card">
         <span class="program-tag rec">Recommended</span>
-        <div class="program-name outline-teal">Chess + Fitness</div>
+        <div class="program-name">Chess + Fitness</div>
         <div class="program-desc">Our signature format: movement first, then chess strategy — building confidence, focus, and healthy habits together.</div>
       </div>
 
       <div class="program-card">
         <span class="program-tag">Option</span>
-        <div class="program-name outline-teal">Chess Focus</div>
+        <div class="program-name">Chess Focus</div>
         <div class="program-desc">Beginner-friendly fundamentals, strategy, and calm decision-making — tailored to your child’s level.</div>
       </div>
 
       <div class="program-card">
         <span class="program-tag">Option</span>
-        <div class="program-name outline-teal">Fitness Focus</div>
+        <div class="program-name">Fitness Focus</div>
         <div class="program-desc">Age-appropriate movement, coordination, and confidence-building — primarily bodyweight and always safe.</div>
       </div>
     </div>
@@ -461,19 +450,19 @@ textarea{min-height:5rem;resize:vertical}
 
   <section id="benefits">
     <div class="section-head">
-      <h2 class="outline-teal">Why it works</h2>
+      <h2 class="h2-teal"><span class="h2-bar">Why it works</span></h2>
       <p>We blend physical activity and chess-style decision making. Kids learn to control their bodies, slow down their reactions, think ahead, and believe in themselves.</p>
     </div>
 
     <div class="benefit-grid">
-      <div class="benefit-card"><div class="benefit-title outline-teal">Focus &amp; Patience</div>Learning not to rush, not to panic, and how to breathe and think before acting — in games and in real life.</div>
-      <div class="benefit-card"><div class="benefit-title outline-teal">Self-Belief</div>We build “I can do this.” Kids learn how to handle frustration, try again, and be proud of effort — not just results.</div>
-      <div class="benefit-card"><div class="benefit-title outline-teal">Healthy Movement</div>Fun, age-appropriate activity that builds coordination, balance, posture, and comfort in their own body.</div>
-      <div class="benefit-card"><div class="benefit-title outline-teal">Calm Under Pressure</div>Your child practices making decisions under pressure, staying composed, and bouncing back after mistakes.</div>
+      <div class="benefit-card"><div class="benefit-title">Focus &amp; Patience</div>Learning not to rush, not to panic, and how to breathe and think before acting — in games and in real life.</div>
+      <div class="benefit-card"><div class="benefit-title">Self-Belief</div>We build “I can do this.” Kids learn how to handle frustration, try again, and be proud of effort — not just results.</div>
+      <div class="benefit-card"><div class="benefit-title">Healthy Movement</div>Fun, age-appropriate activity that builds coordination, balance, posture, and comfort in their own body.</div>
+      <div class="benefit-card"><div class="benefit-title">Calm Under Pressure</div>Your child practices making decisions under pressure, staying composed, and bouncing back after mistakes.</div>
     </div>
 
     <div class="flow-wrap">
-      <div class="flow-head outline-teal">How a Session Works</div>
+      <div class="flow-head">How a Session Works</div>
       <div class="flow-steps">
         <div class="flow-step fit">
           <div class="flow-step-title">Fitness &amp; Movement</div>
@@ -489,12 +478,12 @@ textarea{min-height:5rem;resize:vertical}
     </div>
 
     <div class="philosophy-card">
-      <strong class="outline-teal">We’re not here to create the next Olympic athlete or chess grandmaster.</strong>
+      <strong>We’re not here to create the next Olympic athlete or chess grandmaster.</strong>
       We’re here to help kids get moving, think clearly, and feel proud of themselves. Most of our students start with little or no experience. We meet each child where they are, keep it positive, and make progress fun.
     </div>
 
     <div class="science-card">
-      <div class="science-head outline-teal">Backed by Science</div>
+      <div class="science-head">Backed by Science</div>
       <ul>
         <li>After even a single short burst of physical activity, kids show sharper attention, better working memory, and stronger self-control for up to about two hours. Exercise activates areas in the brain that handle focus and decision-making.</li>
         <li>Movement boosts mood right away: less stress, less irritability, more positive energy, and better emotional self-regulation in children.</li>
@@ -529,7 +518,7 @@ textarea{min-height:5rem;resize:vertical}
 
   <section id="parents">
     <div class="about-card">
-      <div class="about-title outline-teal">For Parents</div>
+      <div class="about-title">For Parents</div>
       <ul>
         <li>We come to you in Middle Tennessee. Parents are always welcome to watch.</li>
         <li>No experience required. We start simple and build up at their pace.</li>
@@ -545,7 +534,7 @@ textarea{min-height:5rem;resize:vertical}
         <div class="about-photo-caption">Coach Adam – Founder, Checkmate Fitness</div>
       </div>
       <div class="about-me-card">
-        <div class="about-me-title outline-teal">About Me</div>
+        <div class="about-me-title">About Me</div>
         <p>Hi, I’m Adam — coach and founder of Checkmate Fitness. I’ve loved chess and physical training since I was young, and now I use that experience to help the next generation grow stronger and more confident.</p>
         <p>As a father of six, I know firsthand how meaningful it is to watch kids pick up new skills, learn self-control, and believe in themselves. My goal is simple: make learning fun, build real confidence, and help kids develop habits that last.</p>
         <p>I’m certified in Basic Life Support (BLS – CPR &amp; AED) and hold both Personal Trainer and Youth Fitness certifications through ISSA, so your child’s sessions are safe, age-appropriate, and well planned.</p>
@@ -553,7 +542,7 @@ textarea{min-height:5rem;resize:vertical}
     </div>
 
     <div class="cert-card">
-      <div class="cert-title outline-teal">Credentials &amp; Certifications</div>
+      <div class="cert-title">Credentials &amp; Certifications</div>
       <ul class="cert-list">
         <li><span class="cert-badge">🏅</span>ISSA Certified Personal Trainer (CPT)</li>
         <li><span class="cert-badge">🏅</span>ISSA Youth Fitness Specialist</li>
@@ -564,7 +553,7 @@ textarea{min-height:5rem;resize:vertical}
 
   <section id="contact">
     <div class="contact-card">
-      <div class="contact-head outline-teal">Ready to Get Started?</div>
+      <div class="contact-head">Ready to Get Started?</div>
       <div class="contact-lines">
         <div><strong>Call / Text:</strong> 480.252.4269</div>
         <div><strong>Email:</strong> info@checkmatefitness.com</div>
@@ -584,7 +573,7 @@ textarea{min-height:5rem;resize:vertical}
 <div class="modal-overlay" id="leadModal">
   <div class="modal-card">
     <button class="modal-close" id="closeModalBtn">✕</button>
-    <div class="modal-head outline-teal">Claim Your Free First Session</div>
+    <div class="modal-head">Claim Your Free First Session</div>
     <div class="modal-desc">Tell us a little about your child and we’ll reach out to schedule.</div>
     <form class="modal-form" method="POST" action="mailto:info@checkmatefitness.com" enctype="text/plain">
       <div><label for="parentName">Parent Name</label><input id="parentName" name="Parent Name" placeholder="Your name" /></div>
