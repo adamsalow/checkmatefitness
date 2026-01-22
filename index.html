@@ -4,482 +4,295 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Checkmate Fitness</title>
+
 <style>
 :root{
-  --teal-main:#00c9c3;
-  --text-dark:#0f0f0f;
-  --text-mid:#444;
-  --bg-page:#fff;
-  --bg-card:#fff;
-  --radius-xl:1.5rem;
-  --radius-lg:1rem;
-  --grid-size:28px;
-  --polaroid-bg:#fff;
+  --teal:#3fc6b6;
+  --black:#000;
+  --white:#fff;
 }
 
-/* reset */
-*{box-sizing:border-box;margin:0;padding:0;-webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility}
 body{
-  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Inter","Roboto","Helvetica Neue",Arial,sans-serif;
-  background:var(--bg-page);
-  color:var(--text-dark);
-  line-height:1.4;
-  display:flex;flex-direction:column;min-height:100vh;
-  background-image:
-    radial-gradient(circle at 20% 20%, rgba(0,201,195,.12) 0%, rgba(0,0,0,0) 70%),
-    radial-gradient(circle at 80% 10%, rgba(0,201,195,.08) 0%, rgba(0,0,0,0) 70%);
+  margin:0;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Arial,sans-serif;
+  background:#f7f9f9;
+  color:#000;
 }
 
-.page-wrap{
-  min-height:100vh;max-width:940px;width:100%;background:var(--bg-card);
-  border:8px solid var(--teal-main);border-radius:var(--radius-xl);
-  box-shadow:0 30px 80px rgba(0,0,0,.25);
-  margin:2rem auto;padding:2rem 1.25rem 3rem;
-  display:flex;flex-direction:column;position:relative;overflow:visible;
-}
-@media(min-width:600px){.page-wrap{padding:3rem 3rem 4rem}}
-
-.header-bg{
-  position:absolute;top:0;left:0;right:0;height:140px;border-top-left-radius:var(--radius-xl);border-top-right-radius:var(--radius-xl);
-  background:repeating-conic-gradient(from 0deg,var(--teal-main) 0 25%,#ffffff 0 50%);background-size:var(--grid-size) var(--grid-size);
-  filter:drop-shadow(0 20px 30px rgba(0,0,0,.15));opacity:.18;pointer-events:none;z-index:1;
+.page{
+  max-width:900px;
+  margin:0 auto;
+  padding:2rem 1.25rem 4rem;
+  background:#fff;
+  border:6px solid var(--teal);
+  position:relative;
 }
 
-header{margin-bottom:2rem;position:relative;z-index:3;display:flex;flex-direction:column;align-items:center;text-align:center}
-
-/* FREE circle */
-.free-circle-wrapper{position:absolute;top:1rem;right:1rem;z-index:5;cursor:pointer;transition:transform .15s}
-.free-circle-wrapper:hover{transform:scale(1.05) rotate(-2deg)}
-.free-circle-wrapper:active{transform:scale(.97) rotate(-2deg)}
-@media(max-width:520px){.free-circle-wrapper{position:static;order:3;margin-top:1rem;transform:none !important}}
-.free-circle{background:#fff;border:4px solid #000;border-radius:50%;width:130px;height:130px;display:flex;align-items:center;justify-content:center;text-align:center;box-shadow:6px 6px 0 #000,0 25px 40px rgba(0,0,0,.4);padding:.75rem;line-height:1.15;position:relative;z-index:2}
-.free-circle:before{content:"";position:absolute;inset:-8px;border-radius:50%;background:var(--teal-main);border:4px solid #000;z-index:-1;transform:rotate(-4deg);box-shadow:6px 6px 0 #000}
-.free-circle-inner{font-weight:800;font-size:.9rem;text-transform:uppercase;color:#000;display:flex;flex-direction:column;align-items:center;justify-content:center}
-.free-circle-inner .line1{font-size:.8rem;font-weight:700;line-height:1.1}
-.free-circle-inner .line2,.free-circle-inner .line3{font-size:1rem;font-weight:800;line-height:1.1}
-.free-circle-inner .line4{font-size:.7rem;font-weight:600;line-height:1.2;margin-top:.25rem}
-@media(max-width:520px){.free-circle{width:120px;height:120px}.free-circle-inner .line2,.free-circle-inner .line3{font-size:.9rem}}
-
-/* logo + headline */
-.logo-block{width:100%;max-width:400px;margin:2rem auto 1rem;z-index:3}
-.logo-block img{width:100%;height:auto;display:block}
-.tagline-wrapper{display:flex;flex-direction:column;align-items:center;text-align:center;max-width:95%;margin:0 auto 1rem;z-index:3}
-.tagline-main{
-  font-size:clamp(2.5rem,2.5vw + 2rem,3.4rem);font-weight:900;line-height:1.1;letter-spacing:-.04em;padding:.25rem .5rem;color:#fff;
-  text-shadow:-2px -2px 0 var(--teal-main),2px -2px 0 var(--teal-main),-2px 2px 0 var(--teal-main),2px 2px 0 var(--teal-main),0 0 6px #00000055;
-}
-@media(max-width:520px){.tagline-main{font-size:clamp(2.2rem,2vw + 1.8rem,2.6rem)}}
-.brand-headline{margin-top:.5rem;font-size:clamp(1.2rem,1vw +1rem,1.5rem);font-weight:800;color:var(--text-dark);line-height:1.2;text-align:center;letter-spacing:-.04em;max-width:24ch}
-.age-pill{margin:.75rem auto 0;background:var(--teal-main);color:#000;font-weight:600;display:inline-block;padding:.4rem .7rem;border-radius:.75rem;font-size:.75rem;line-height:1.2;border:2px solid #000;box-shadow:3px 3px 0 rgba(0,0,0,.5)}
-.hero-sub{max-width:48ch;margin:.75rem auto 0;font-size:1.05rem;line-height:1.5;font-weight:500;color:var(--text-mid);text-align:center}
-.service-area-ribbon{margin:1rem auto 0;background:var(--teal-main);color:#000;font-weight:700;display:inline-block;padding:.6rem .9rem;border-radius:var(--radius-lg);font-size:.8rem;line-height:1.2;box-shadow:0 20px 40px rgba(0,0,0,.25),4px 4px 0 rgba(0,0,0,.6);text-align:center;text-transform:uppercase;letter-spacing:.03em;border:3px solid #000;position:relative}
-
-/* sections */
-section{margin-top:2.5rem;position:relative;z-index:3}
-.section-head{text-align:center;margin-bottom:1.5rem}
-.section-head h2{font-size:1.4rem;font-weight:800;line-height:1.2;letter-spacing:-.03em;color:var(--teal-main);text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;margin-bottom:.5rem}
-.section-head p{font-size:1rem;line-height:1.5;color:var(--text-mid);font-weight:500;max-width:45ch;margin:0 auto}
-
-/* benefits */
-.benefit-grid{display:grid;grid-template-columns:1fr;gap:1rem}
-@media(min-width:600px){.benefit-grid{grid-template-columns:repeat(2,1fr)}}
-.benefit-card{background:#fff;border:3px solid #000;border-radius:var(--radius-xl);box-shadow:4px 4px 0 var(--teal-main),0 24px 48px rgba(0,0,0,.12);padding:1rem 1rem .9rem;font-size:1rem;font-weight:500;line-height:1.5;color:var(--text-dark)}
-.benefit-title{font-size:1rem;font-weight:800;line-height:1.2;margin-bottom:.5rem;color:var(--teal-main);text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000}
-
-/* flow */
-.flow-wrap{max-width:780px;margin:2rem auto 0;text-align:center}
-.flow-head{font-size:1.2rem;font-weight:800;line-height:1.2;color:var(--teal-main);text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;margin-bottom:1rem;letter-spacing:-.03em}
-.flow-steps{display:flex;flex-direction:column;align-items:stretch;gap:1rem}
-@media(min-width:600px){.flow-steps{flex-direction:row;align-items:center;justify-content:center;gap:1rem}}
-.flow-step{flex:1;min-width:0;background:#fff;border:3px solid #000;border-radius:var(--radius-xl);box-shadow:4px 4px 0 var(--teal-main),0 24px 48px rgba(0,0,0,.12);padding:1rem .9rem;text-align:center}
-.flow-step-title{font-weight:800;font-size:1rem;line-height:1.2;margin-bottom:.5rem;color:#fff;text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000}
-.flow-step-desc{font-size:.9rem;font-weight:500;line-height:1.4;color:var(--text-mid);max-width:26ch;margin:0 auto}
-.flow-step.fit{background:var(--teal-main);color:#000}
-.flow-step.fit .flow-step-desc{color:#000;font-weight:600}
-.flow-step.chess{background:repeating-conic-gradient(from 0deg,var(--teal-main) 0 25%,#ffffff 0 50%);background-size:20px 20px;color:#000}
-.flow-step.chess .flow-step-desc{color:#000;font-weight:600}
-.flow-arrow{display:none;font-size:2rem;font-weight:900;line-height:1;color:#000;text-shadow:3px 3px 0 var(--teal-main),-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000}
-@media(min-width:600px){.flow-arrow{display:block}}
-.flow-note{font-size:.8rem;line-height:1.4;font-weight:500;color:#444;max-width:38ch;margin:1rem auto 0}
-
-/* philosophy */
-.philosophy-card{background:#fff;border:3px solid #000;border-radius:var(--radius-xl);box-shadow:4px 4px 0 var(--teal-main),0 24px 48px rgba(0,0,0,.12);padding:1rem 1rem .9rem;max-width:750px;margin:2rem auto 0;font-size:1rem;font-weight:500;line-height:1.5;color:var(--text-dark)}
-.philosophy-card strong{font-weight:800;color:var(--teal-main);text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000}
-
-/* science */
-.science-card{background:#fff;border:3px solid #000;border-radius:var(--radius-xl);box-shadow:4px 4px 0 var(--teal-main),0 24px 48px rgba(0,0,0,.12);padding:1.25rem 1rem 1rem;max-width:750px;margin:2.5rem auto 0;font-size:.95rem;font-weight:500;line-height:1.5;color:var(--text-dark)}
-.science-head{font-size:1.1rem;font-weight:800;line-height:1.2;letter-spacing:-.03em;color:var(--teal-main);text-align:center;margin-bottom:.75rem;text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000}
-.science-card ul{padding-left:1rem}
-.science-card li{margin-bottom:.6rem}
-
-/* DID YOU KNOW? — give wrapper height so next section never overlaps */
-.didyou-wrap{
-  position:relative;max-width:860px;margin:2rem auto 0;min-height:1px;
-  padding-bottom:200px;
-  z-index:1000;
-}
-.didyou-balloon{
-  position:absolute;right:-40px;top:-10px;background:#fff;border:3px solid #000;border-radius:1.25rem;
-  box-shadow:6px 6px 0 rgba(0,0,0,.5),0 30px 60px rgba(0,0,0,.25);
-  padding:1rem;width:min(360px,80vw);transform:rotate(2deg);z-index:1001;
-}
-.didyou-balloon:after,.didyou-balloon:before{
-  content:"";position:absolute;bottom:-18px;right:40px;width:18px;height:18px;background:#fff;border:3px solid #000;border-radius:50%;
-}
-.didyou-balloon:before{bottom:-34px;right:28px;width:12px;height:12px}
-.didyou-title{font-size:1rem;font-weight:900;letter-spacing:.02em;display:flex;align-items:center;gap:.5rem;margin-bottom:.5rem;color:#fff;text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000}
-.didyou-title .title-chip{
-  background:var(--teal-main);border:3px solid #000;border-radius:.6rem;padding:.15rem .6rem;color:#fff;
-  text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;
-  box-shadow:3px 3px 0 rgba(0,0,0,.45)
-}
-.didyou-visuals{display:flex;align-items:center;gap:.5rem;margin-bottom:.4rem}
-.big-q{font-weight:900;font-size:2.2rem;line-height:1;color:#fff;text-shadow:-2px -2px 0 var(--teal-main),2px -2px 0 var(--teal-main),-2px 2px 0 var(--teal-main),2px 2px 0 var(--teal-main)}
-.helmet{width:40px;height:32px;flex:0 0 auto;filter:drop-shadow(2px 2px 0 #000)}
-/* Small screens: stack balloon and remove tail dots */
-@media(max-width:900px){
-  .didyou-balloon{position:relative;right:auto;top:auto;transform:none;margin:1rem auto 0}
-  .didyou-balloon:after,.didyou-balloon:before{display:none}
-  .didyou-wrap{padding-bottom:0}
-}
-
-/* parents */
-.about-card{
-  background:#fff;border:3px solid #000;border-radius:var(--radius-xl);
-  box-shadow:4px 4px 0 var(--teal-main),0 24px 48px rgba(0,0,0,.12);
-  padding:1.25rem 1rem 1rem;max-width:750px;margin:2.5rem auto 0;
-  font-size:1rem;font-weight:500;line-height:1.5;color:var(--text-dark);
+header{
   text-align:center;
+  position:relative;
 }
-.about-title{
-  font-size:1.2rem;font-weight:800;line-height:1.2;text-align:center;letter-spacing:-.03em;margin-bottom:.75rem;color:var(--teal-main);
-  text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;
-}
-.about-card ul{
-  list-style:disc inside;
-  display:inline-block;
-  text-align:left;
+
+.logo{
+  max-width:260px;
   margin:0 auto;
 }
-.about-card li{margin-bottom:.6rem}
 
-/* about me + photo layout */
-.about-me-layout{
-  max-width:750px;
-  margin:2.5rem auto 0;
-  display:flex;
-  gap:1.25rem;
-  align-items:stretch;
-  flex-wrap:wrap;
+.hero-title{
+  margin:1rem 0 .5rem;
+  font-size:2.4rem;
+  font-weight:900;
+  color:#fff;
+  -webkit-text-stroke:2px var(--teal);
+  text-transform:uppercase;
 }
-.about-photo-card{
-  flex:0 0 220px;
-  max-width:220px;
-  background:#fff;
-  border:3px solid #000;
-  border-radius:1.25rem;
-  box-shadow:6px 6px 0 rgba(0,0,0,.5),0 30px 60px rgba(0,0,0,.25);
-  padding:.6rem .6rem .75rem;
-  text-align:center;
-}
-.about-photo-card img{
-  width:100%;
-  height:auto;
-  border-radius:1rem;
-  display:block;
-  object-fit:cover;
-}
-.about-photo-caption{
-  margin-top:.4rem;
-  font-size:.8rem;
+
+.tagline{
   font-weight:600;
-  color:#111;
-}
-.about-me-card{
-  background:#fff;border:3px solid #000;border-radius:var(--radius-xl);box-shadow:4px 4px 0 var(--teal-main),0 24px 48px rgba(0,0,0,.12);padding:1.25rem 1rem 1rem;max-width:750px;font-size:1rem;font-weight:500;line-height:1.5;color:var(--text-dark);text-align:left;flex:1;margin:0;
-}
-.about-me-title{font-size:1.2rem;font-weight:800;line-height:1.2;text-align:center;letter-spacing:-.03em;margin-bottom:.75rem;color:var(--teal-main);text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000}
-.about-me-card p + p{margin-top:.75rem}
-
-@media(max-width:700px){
-  .about-me-layout{
-    flex-direction:column;
-    align-items:center;
-  }
-  .about-photo-card{
-    max-width:260px;
-    width:100%;
-  }
-  .about-me-card{
-    width:100%;
-  }
+  margin-bottom:1.5rem;
 }
 
-/* certifications card */
-.cert-card{
-  background:#fff;
-  border:3px solid #000;
-  border-radius:var(--radius-xl);
-  box-shadow:4px 4px 0 var(--teal-main),0 24px 48px rgba(0,0,0,.12);
-  padding:1.1rem 1rem 1rem;
-  max-width:750px;
-  margin:1.75rem auto 0;
-  font-size:.95rem;
-  font-weight:500;
-  line-height:1.5;
-  color:var(--text-dark);
-  text-align:left;
-}
-.cert-title{
-  font-size:1.1rem;
-  font-weight:800;
-  line-height:1.2;
-  margin-bottom:.6rem;
-  color:var(--teal-main);
+.free-circle{
+  position:absolute;
+  top:20px;
+  right:-40px;
+  width:150px;
+  height:150px;
+  background:var(--teal);
+  border-radius:50%;
+  border:4px solid #000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:900;
   text-align:center;
-  letter-spacing:-.03em;
-  text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000;
+  box-shadow:5px 5px 0 rgba(0,0,0,.6);
 }
-.cert-list{
+
+section{
+  margin-top:3rem;
+}
+
+.section-title{
+  font-size:1.7rem;
+  font-weight:800;
+  margin-bottom:1rem;
+}
+
+.card{
+  border:3px solid #000;
+  padding:1.5rem;
+  box-shadow:6px 6px 0 rgba(0,0,0,.6);
+  background:#fff;
+}
+
+.how-grid{
+  display:grid;
+  grid-template-columns:1fr 1fr;
+  gap:1.25rem;
+}
+
+.step-title{
+  font-size:1.3rem;
+  font-weight:900;
+  color:#fff;
+  -webkit-text-stroke:1.5px #000;
+  margin-bottom:.5rem;
+}
+
+.parent-list{
   list-style:none;
-  padding-left:0;
+  padding:0;
   margin:0;
 }
-.cert-list li{
-  margin-bottom:.4rem;
-  font-weight:600;
-}
-.cert-badge{
-  margin-right:.35rem;
+
+.parent-list li{
+  margin-bottom:.6rem;
 }
 
-/* contact */
-.contact-card{background:#fff;border:3px solid #000;border-radius:var(--radius-xl);box-shadow:4px 4px 0 var(--teal-main),0 24px 48px rgba(0,0,0,.12);padding:1.5rem 1.25rem 1.25rem;max-width:750px;margin:2.5rem auto 0;color:#0f0f0f;text-align:center}
-.contact-head{font-size:1.3rem;font-weight:800;line-height:1.2;letter-spacing:-.03em;margin-bottom:.75rem;color:var(--teal-main);text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000}
-.contact-lines{font-size:1rem;font-weight:500;line-height:1.5;color:#0f0f0f}
-.contact-lines div{margin-bottom:.5rem}
-.contact-reassure{font-size:.8rem;line-height:1.4;color:#444;margin-top:.5rem}
-.first-free-btn{display:inline-block;font-size:1rem;font-weight:800;line-height:1.2;text-decoration:none;cursor:pointer;margin-top:1rem;border-radius:var(--radius-lg);border:3px solid #000;box-shadow:4px 4px 0 var(--teal-main),0 24px 48px rgba(0,0,0,.12);padding:.8rem 1rem;color:#000;background:repeating-conic-gradient(from 0deg,var(--teal-main) 0 25%,#ffffff 0 50%);background-size:20px 20%}
+.about-wrap{
+  display:grid;
+  grid-template-columns:180px 1fr;
+  gap:1.25rem;
+  align-items:center;
+}
 
-/* footer */
-footer{text-align:center;font-size:.7rem;font-weight:500;color:#666;line-height:1.4;margin-top:3rem;position:relative;z-index:3}
+.about-wrap img{
+  width:100%;
+  border-radius:12px;
+  border:3px solid #000;
+  box-shadow:5px 5px 0 rgba(0,0,0,.6);
+}
 
-/* modal */
-.modal-overlay{position:fixed;inset:0;background:rgba(0,0,0,.6);display:none;align-items:center;justify-content:center;padding:1rem;z-index:10000}
-.modal-card{width:100%;max-width:400px;background:#fff;border-radius:var(--radius-xl);border:4px solid #000;box-shadow:4px 4px 0 var(--teal-main),0 40px 120px rgba(0,0,0,.5);padding:1.25rem 1rem 1rem;position:relative}
-.modal-close{position:absolute;top:.5rem;right:.75rem;background:var(--teal-main);border:3px solid #000;font-size:1rem;font-weight:800;color:#000;cursor:pointer;border-radius:.5rem;line-height:1;padding:.25rem .5rem;box-shadow:3px 3px 0 rgba(0,0,0,.4)}
-.modal-head{font-size:1.2rem;font-weight:800;line-height:1.2;text-align:center;margin-bottom:.5rem;color:var(--teal-main);text-shadow:-1px -1px 0 #000,1px -1px 0 #000,-1px 1px 0 #000,1px 1px 0 #000}
-.modal-desc{font-size:.9rem;font-weight:500;line-height:1.4;color:#444;text-align:center;margin-bottom:1rem}
-form.modal-form{display:grid;gap:.75rem}
-label{font-size:.8rem;font-weight:600;color:#0f0f0f;margin-bottom:.25rem;display:block}
-input,textarea{width:100%;border-radius:var(--radius-lg);border:3px solid #000;padding:.6rem .7rem;font-family:inherit;font-size:.9rem;font-weight:500;line-height:1.3;color:#0f0f0f;background:#fff;box-shadow:3px 3px 0 var(--teal-main)}
-textarea{min-height:5rem;resize:vertical}
-.submit-btn{display:inline-block;background:var(--teal-main);color:#000;font-size:1rem;font-weight:800;padding:.8rem 1rem;border-radius:var(--radius-lg);line-height:1.2;border:3px solid #000;cursor:pointer;box-shadow:4px 4px 0 rgba(0,0,0,.4)}
-.submit-note{font-size:.7rem;color:#444;line-height:1.4;text-align:center;margin-top:.5rem}
+.badges{
+  display:flex;
+  gap:.75rem;
+  flex-wrap:wrap;
+  margin-top:1rem;
+}
 
-/* photos (unchanged positions) */
-.floater{position:absolute;width:220px;max-width:46vw;background:var(--polaroid-bg);border:3px solid #000;border-radius:.75rem;box-shadow:6px 6px 0 rgba(0,0,0,.5),0 30px 60px rgba(0,0,0,.35);padding:.5rem .5rem 1rem;text-align:center;font-size:.75rem;font-weight:600;color:#000;line-height:1.3;z-index:2}
-.floater img{width:100%;height:auto;border-radius:.5rem;display:block;box-shadow:0 10px 20px rgba(0,0,0,.25);background:#fff;object-fit:cover}
-.floater span{display:block;margin-top:.4rem;word-break:break-word;font-weight:600;color:#000}
-.floater.f1{top:160px;left:-140px;transform:rotate(-7deg)}
-.floater.f2{top:200px;right:-150px;transform:rotate(5deg)}
-.floater.f3{top:900px;left:-140px;transform:rotate(-4deg)}
-.floater.f4{top:1450px;right:-150px;transform:rotate(6deg)}
-.floater.f5{top:1950px;left:-130px;transform:rotate(-5deg)}
-@media(max-width:800px){
-  .floater{left:50% !important;right:auto !important;transform:translateX(-50%) rotate(0deg) !important;width:198px;max-width:70vw;opacity:.15;z-index:1;font-size:.7rem}
-  .floater.f1{top:220px}.floater.f2{top:400px}.floater.f3{top:900px}.floater.f4{top:1500px}.floater.f5{top:2050px}
+.badge{
+  border:2px solid #000;
+  padding:.5rem .75rem;
+  font-weight:700;
+  background:var(--teal);
+}
+
+.didyouknow{
+  position:relative;
+  margin-top:3rem;
+}
+
+.didyouknow .bubble{
+  position:absolute;
+  right:-120px;
+  top:0;
+  max-width:260px;
+  background:#fff;
+  border:3px solid #000;
+  padding:1rem;
+  box-shadow:6px 6px 0 rgba(0,0,0,.6);
+  z-index:5;
+}
+
+.didyouknow h4{
+  margin:0 0 .5rem;
+  color:#fff;
+  -webkit-text-stroke:1px #000;
+}
+
+.didyouknow img{
+  width:100%;
+  margin-top:.5rem;
+}
+
+.contact{
+  text-align:center;
+}
+
+.contact a{
+  display:inline-block;
+  margin-top:1rem;
+  padding:1rem 1.5rem;
+  font-weight:900;
+  background:repeating-linear-gradient(
+    45deg,
+    var(--teal),
+    var(--teal) 12px,
+    #fff 12px,
+    #fff 24px
+  );
+  border:4px solid #000;
+  color:#000;
+  text-decoration:none;
+  box-shadow:6px 6px 0 rgba(0,0,0,.6);
+}
+
+footer{
+  margin-top:4rem;
+  text-align:center;
+  font-size:.8rem;
+}
+
+@media(max-width:700px){
+  .how-grid{grid-template-columns:1fr;}
+  .about-wrap{grid-template-columns:1fr;}
+  .free-circle{right:-10px; top:-20px;}
+  .didyouknow .bubble{position:static; margin-top:1rem;}
 }
 </style>
 </head>
+
 <body>
-<main class="page-wrap">
+<div class="page">
 
-  <!-- floating polaroid-style photos -->
-  <div class="floater f1"><img src="chess-teacher.jpg" alt="Kids learning chess with coach"><span>Thinking before moving.</span></div>
-  <div class="floater f2"><img src="ladder.jpg" alt="Footwork and coordination drills"><span>Speed + balance.</span></div>
-  <div class="floater f3"><img src="chess.jpg" alt="Focused chess battle"><span>Strategy &amp; patience.</span></div>
-  <div class="floater f4"><img src="squats.jpg" alt="Kids doing bodyweight squats"><span>Strong &amp; confident.</span></div>
-  <div class="floater f5"><img src="pushups.jpg" alt="Building core strength and focus"><span>We don’t quit.</span></div>
+<header>
+  <img src="logo.png" class="logo" alt="Checkmate Fitness Logo">
+  <div class="hero-title">Chess + Fitness for Kids</div>
+  <div class="tagline">Strong Minds. Strong Bodies. Every Move Counts.</div>
 
-  <div class="header-bg"></div>
-
-  <header>
-    <div class="free-circle-wrapper" id="openFormCircle">
-      <div class="free-circle"><div class="free-circle-inner"><div class="line1">First</div><div class="line2">Session</div><div class="line3">is FREE!</div><div class="line4">Tap to claim</div></div></div>
-    </div>
-
-    <div class="logo-block"><img src="logo.png" alt="Checkmate Fitness logo"/></div>
-
-    <div class="tagline-wrapper"><div class="tagline-main">Chess + Fitness for Kids</div></div>
-
-    <div class="brand-headline">Stronger Bodies. Stronger Minds. Confident Kids.</div>
-    <div class="age-pill">Ages 7–14 • All experience levels welcome</div>
-    <div class="hero-sub">We help kids grow through movement, strategy, and focused play. Your child builds confidence, patience, self-control, problem-solving — and has fun doing it.</div>
-    <div class="service-area-ribbon">Middle Tennessee · Mobile Training</div>
-  </header>
-
-  <section id="benefits">
-    <div class="section-head">
-      <h2>Why it works</h2>
-      <p>We blend physical activity and chess-style decision making. Kids learn to control their bodies, slow down their reactions, think ahead, and believe in themselves.</p>
-    </div>
-
-    <div class="benefit-grid">
-      <div class="benefit-card"><div class="benefit-title">Focus &amp; Patience</div>Learning not to rush, not to panic, and how to breathe and think before acting — in games and in real life.</div>
-      <div class="benefit-card"><div class="benefit-title">Self-Belief</div>We build “I can do this.” Kids learn how to handle frustration, try again, and be proud of effort — not just results.</div>
-      <div class="benefit-card"><div class="benefit-title">Healthy Movement</div>Fun, age-appropriate activity that builds coordination, balance, posture, and comfort in their own body.</div>
-      <div class="benefit-card"><div class="benefit-title">Calm Under Pressure</div>Your child practices making decisions under pressure, staying composed, and bouncing back after mistakes.</div>
-    </div>
-
-    <div class="flow-wrap">
-      <div class="flow-head">How a Session Works</div>
-      <div class="flow-steps">
-        <div class="flow-step fit">
-          <div class="flow-step-title">Fitness &amp; Movement</div>
-          <div class="flow-step-desc">Warm-up, balance, agility, core strength. Energy up, stress down, body engaged.</div>
-        </div>
-        <div class="flow-arrow">➜</div>
-        <div class="flow-step chess">
-          <div class="flow-step-title">Chess &amp; Strategy</div>
-          <div class="flow-step-desc">Think ahead, manage emotions, make smart choices under pressure.</div>
-        </div>
-      </div>
-      <div class="flow-note">Our program blends equal parts fitness and chess. If you'd like a session that focuses more on one or the other, just ask and we'll tailor it.</div>
-    </div>
-
-    <div class="philosophy-card">
-      <strong>We’re not here to create the next Olympic athlete or chess grandmaster.</strong>
-      We’re here to help kids get moving, think clearly, and feel proud of themselves. Most of our students start with little or no experience. We meet each child where they are, keep it positive, and make progress fun.
-    </div>
-
-    <div class="science-card">
-      <div class="science-head">Backed by Science</div>
-      <ul>
-        <li>After even a single short burst of physical activity, kids show sharper attention, better working memory, and stronger self-control for up to about two hours. Exercise activates areas in the brain that handle focus and decision-making.</li>
-        <li>Movement boosts mood right away: less stress, less irritability, more positive energy, and better emotional self-regulation in children.</li>
-        <li>Over time, regular physical activity strengthens “executive function,” which includes planning ahead, problem solving, impulse control, and flexible thinking — skills that help in school, sports, and daily life.</li>
-      </ul>
-    </div>
-
-    <!-- DID YOU KNOW? -->
-    <div class="didyou-wrap">
-      <div class="didyou-balloon">
-        <div class="didyou-title"><span class="title-chip">Did You Know?</span></div>
-        <div class="didyou-visuals">
-          <div class="big-q">?</div>
-          <!-- Traditional-color Gladiator Helmet SVG -->
-          <svg class="helmet" viewBox="0 0 128 96" aria-hidden="true">
-            <!-- Red crest -->
-            <path d="M18 30 C38 6, 90 6, 110 30 L96 38 C82 20, 46 20, 32 38 Z"
-                  fill="#C62828" stroke="#000" stroke-width="4"/>
-            <!-- Brass/gold dome -->
-            <path d="M24 40 Q64 8 104 40 L104 64 L24 64 Z"
-                  fill="#C9A227" stroke="#000" stroke-width="4"/>
-            <!-- Cheek guards (gold) -->
-            <path d="M24 64 L44 64 L44 82 L30 82 Q24 80 24 74 Z"
-                  fill="#C9A227" stroke="#000" stroke-width="4"/>
-            <path d="M104 64 L84 64 L84 82 L98 82 Q104 80 104 74 Z"
-                  fill="#C9A227" stroke="#000" stroke-width="4"/>
-            <!-- Face opening -->
-            <rect x="44" y="64" width="40" height="16" fill="#000"/>
-            <!-- Nose guard -->
-            <rect x="62" y="40" width="4" height="24" fill="#000"/>
-            <!-- Rivet dots for detail -->
-            <circle cx="40" cy="52" r="2" fill="#000"/>
-            <circle cx="88" cy="52" r="2" fill="#000"/>
-          </svg>
-        </div>
-        <div class="didyou-body">
-          In ancient Rome, they had a saying <em>“mens sana in corpore sano”</em> — which translates to “a healthy mind in a healthy body.” Even thousands of years ago, people understood that physical health and mental health are interconnected — each supports the other.
-        </div>
-      </div>
-    </div>
-
-  </section>
-
-  <section id="parents">
-    <div class="about-card">
-      <div class="about-title">For Parents</div>
-      <ul>
-        <li>We come to you in Middle Tennessee. Parents are always welcome to watch.</li>
-        <li>No experience required. We start simple and build up at their pace.</li>
-        <li>Sessions are positive, encouraging, and tailored to each child.</li>
-      </ul>
-    </div>
-  </section>
-
-  <section id="about-me">
-    <div class="about-me-layout">
-      <div class="about-photo-card">
-        <img src="adam.jpg" alt="Coach Adam, founder of Checkmate Fitness">
-        <div class="about-photo-caption">Coach Adam – Founder, Checkmate Fitness</div>
-      </div>
-      <div class="about-me-card">
-        <div class="about-me-title">About Me</div>
-        <p>Hi, I’m Adam — coach and founder of Checkmate Fitness. I’ve loved chess and physical training since I was young, and now I use that experience to help the next generation grow stronger and more confident.</p>
-        <p>As a father of six, I know firsthand how meaningful it is to watch kids pick up new skills, learn self-control, and believe in themselves. My goal is simple: make learning fun, build real confidence, and help kids develop habits that last.</p>
-        <p>I’m certified in Basic Life Support (BLS – CPR &amp; AED) and hold both Personal Trainer and Youth Fitness certifications through ISSA, so your child’s sessions are safe, age-appropriate, and well planned.</p>
-      </div>
-    </div>
-
-    <div class="cert-card">
-      <div class="cert-title">Credentials &amp; Certifications</div>
-      <ul class="cert-list">
-        <li><span class="cert-badge">🏅</span>ISSA Certified Personal Trainer (CPT)</li>
-        <li><span class="cert-badge">🏅</span>ISSA Youth Fitness Specialist</li>
-        <li><span class="cert-badge">❤️</span>Basic Life Support (BLS) – CPR &amp; AED</li>
-      </ul>
-    </div>
-  </section>
-
-  <section id="contact">
-    <div class="contact-card">
-      <div class="contact-head">Ready to Get Started?</div>
-      <div class="contact-lines">
-        <div><strong>Call / Text:</strong> 480.252.4269</div>
-        <div><strong>Email:</strong> info@checkmatefitness.com</div>
-        <div><strong>Service Area:</strong> Middle Tennessee · Mobile Training</div>
-      </div>
-      <div class="contact-reassure">No contracts. We’ll answer questions and set up a free first session.</div>
-      <a class="first-free-btn" id="openFormButton">Click For Your Free First Session</a>
-    </div>
-  </section>
-
-  <footer>© <span id="year"></span> Checkmate Fitness</footer>
-</main>
-
-<!-- Modal -->
-<div class="modal-overlay" id="leadModal">
-  <div class="modal-card">
-    <button class="modal-close" id="closeModalBtn">✕</button>
-    <div class="modal-head">Claim Your Free First Session</div>
-    <div class="modal-desc">Tell us a little about your child and we’ll reach out to schedule.</div>
-    <form class="modal-form" method="POST" action="mailto:info@checkmatefitness.com" enctype="text/plain">
-      <div><label for="parentName">Parent Name</label><input id="parentName" name="Parent Name" placeholder="Your name" /></div>
-      <div><label for="childAge">Child Age</label><input id="childAge" name="Child Age" placeholder="Age" /></div>
-      <div><label for="contactNumber">Your Phone / Text #</label><input id="contactNumber" name="Parent Phone" placeholder="###-###-####" /></div>
-      <div><label for="goal">Goal For Your Child</label><textarea id="goal" name="Goal" placeholder="Confidence, focus, better behavior, movement, etc."></textarea></div>
-      <button type="submit" class="submit-btn">Send to Checkmate Fitness</button>
-      <div class="submit-note">When you tap send, this opens an email to info@checkmatefitness.com with your answers filled in. You can review and hit send.</div>
-    </form>
+  <div class="free-circle">
+    FIRST<br>SESSION<br>FREE!
   </div>
-</div>
+</header>
 
-<script>
-document.getElementById('year').textContent = new Date().getFullYear();
-const modal=document.getElementById('leadModal');
-const openBtn=document.getElementById('openFormButton');
-const circleWrapper=document.getElementById('openFormCircle')||document.querySelector('.free-circle-wrapper');
-const circleClickTarget=document.querySelector('.free-circle-wrapper');
-const closeBtn=document.getElementById('closeModalBtn');
-function openModal(){modal.style.display='flex'}
-function closeModal(){modal.style.display='none'}
-if(openBtn)openBtn.addEventListener('click',openModal);
-if(circleWrapper)circleWrapper.addEventListener('click',openModal);
-if(circleClickTarget)circleClickTarget.addEventListener('click',openModal);
-if(closeBtn)closeBtn.addEventListener('click',closeModal);
-modal.addEventListener('click',(e)=>{if(e.target===modal){closeModal()}});
-</script>
+<section>
+  <div class="card">
+    We offer chess training, fitness training, and our signature <strong>Chess + Fitness</strong> program — which blends both and is what we recommend for most kids.
+  </div>
+</section>
+
+<section>
+  <div class="section-title">How a Session Works</div>
+  <div class="how-grid">
+    <div class="card">
+      <div class="step-title">Fitness & Movement</div>
+      Fun, age-appropriate movement that builds coordination, confidence, and energy. Exercises are primarily bodyweight and adapted to each child.
+    </div>
+    <div class="card">
+      <div class="step-title">Chess & Strategy</div>
+      Structured chess instruction focused on thinking ahead, problem-solving, patience, and learning to stay calm under pressure.
+    </div>
+  </div>
+  <p style="margin-top:1rem;">
+    Our program blends equal parts fitness and chess. If you'd like a session that focuses more on one or the other, just ask and we'll tailor it.
+  </p>
+</section>
+
+<section>
+  <div class="section-title">For Parents</div>
+  <div class="card">
+    <ul class="parent-list">
+      <li>We come to you in Middle Tennessee — parks and shared spaces work great.</li>
+      <li>No experience required. Many kids begin with little to no chess or fitness background.</li>
+      <li>Sessions are positive, encouraging, and tailored to each child.</li>
+    </ul>
+  </div>
+</section>
+
+<section class="didyouknow">
+  <div class="card">
+    <div class="section-title">Why This Works</div>
+    Physical activity increases focus, improves mood, and helps kids learn more effectively — which is why combining movement with thinking is so powerful.
+  </div>
+
+  <div class="bubble">
+    <h4>Did You Know?</h4>
+    In ancient Rome, they had a saying <em>mens sana in corpore sano</em> — “a healthy mind in a healthy body.” Even thousands of years ago, people understood that physical and mental health are deeply connected.
+    <img src="helmet.png" alt="Gladiator Helmet">
+  </div>
+</section>
+
+<section>
+  <div class="section-title">About Me</div>
+  <div class="card about-wrap">
+    <img src="adam.jpg" alt="Coach Adam">
+    <div>
+      Hi, I’m Adam — coach and founder of Checkmate Fitness. I’ve been passionate about chess and fitness since childhood, and now I use that experience to help kids grow stronger, sharper, and more confident. As a father of six, I know firsthand how powerful it is to see kids learn new skills and believe in themselves.
+      <div class="badges">
+        <div class="badge">ISSA Personal Trainer</div>
+        <div class="badge">ISSA Youth Fitness</div>
+        <div class="badge">BLS / CPR / AED</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="contact">
+  <div class="card">
+    <div class="section-title">Ready to Get Started?</div>
+    First session is free — no pressure, just a chance to see if it’s a good fit.
+    <br><br>
+    <strong>Group programs, co-ops, and homeschool partnerships available — just ask.</strong>
+    <br>
+    <a href="mailto:info@checkmatefitness.com">Click for Your Free First Session</a>
+  </div>
+</section>
+
+<footer>
+  © 2026 Checkmate Fitness
+</footer>
+
+</div>
 </body>
 </html>
